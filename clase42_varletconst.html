@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var damian = {
+      nombre: 'Damian',
+      apellido: 'Vigo',
+      edad: 31
+    }
+    
+    // variable var
+
+   /*  function esMayorDeEdad(persona) {
+      var mensaje, mensaje2
+      
+      if (persona.edad > 18) {
+      
+        mensaje = 'Es mayor de edad'
+      
+      } else {
+
+        mensaje = 'Es menor de edad'
+        mensaje2 = 'Este es otro mensaje'
+      }
+
+      console.log(mensaje)
+      console.log(mensaje2)
+
+      }
+    
+      esMayorDeEdad(damian) */
+
+      /* function esMayorDeEdad(persona) {
+      let mensaje // let reduce su alcance solamente al bloque de codigo donde es utilizado
+      
+      if (persona.edad > 18) {
+      
+        mensaje = 'Es mayor de edad'
+      
+      } else {
+
+        mensaje = 'Es menor de edad'
+      
+      }
+
+      console.log(mensaje)
+     
+
+      }
+    
+      esMayorDeEdad(damian) */
+
+
+
+      function esMayorDeEdad(persona) {
+      let mensaje 
+      const MAYORIA_DE_EDAD = 18 // const se comporta parecido a let pero no se puede volver asignar la variable, sera en este caso constante a 18
+    
+      if (persona.edad > MAYORIA_DE_EDAD) {
+      
+        mensaje = 'Es mayor de edad'
+      
+      } else {
+
+        mensaje = 'Es menor de edad'
+      
+      }
+
+      console.log(mensaje)
+     
+
+      }
+    
+    //  esMayorDeEdad(damian)
+
+    for (var i =0; i < 10; i++) { //en este ejemplo se puede usar let en vez de var, se recomienda reducir el alcance para evitar bugs 
+      console.log(i)
+    }
+
+      console.log(`Terminó el for, el valor de i es ${i}`)
+  </script>
+</body>
+</html>
