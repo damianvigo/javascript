@@ -1,0 +1,24 @@
+{
+  "name": "idioma",
+  "version": "0.1.0",
+  "description": "Traductor de idioma",
+  "main": "dist/idioma.js",
+  "scripts": {
+    "build": "babel src/idioma.js -d dist",
+    "test": "mocha"
+  },
+  "keywords": [
+    "fundamentos",
+    "javascript",
+    "js"
+  ],
+  "author": "Damian Vigo <damiandanielvigo@gmail.com> (https://damianvigo.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}
