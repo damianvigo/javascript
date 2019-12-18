@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scope de Javascript</title>
+</head>
+
+<body>
+  <script>
+
+    // variables de tipo global y tipo local
+    
+    // variable local. Las variables locales son las que han sido creadas dentro de una funcion o una funcion anidada (una funcion dentro de otra)
+
+    // function saludo() {
+    //   var texto = 'Hola mundo'
+    //  /*  console.log(texto) */
+    // }
+
+    // saludo()
+    // console.log(texto)
+
+    // variable local con funciones anidadas
+      /* function saludo() {
+        var texto = 'Hola mundo'
+
+        function mensaje() {
+          console.log(texto)
+        }
+
+       mensaje()
+      
+      }
+
+      saludo() */
+
+     // variables globales
+      
+     /* var texto = 'Hola mundo'
+
+     function saludo() {
+       console.log(texto)
+
+       texto = 'Hola mundo, modificado'
+       console.log(texto)
+     }
+
+     saludo() */
+
+     // IMPORTANTE 
+
+    //  function saludo() {
+    //   // var mensaje = 'Hola mundo' variable local
+    //   mensaje = 'Hola mundo' // variable global
+    //  }
+    //  saludo()
+    //  console.log(mensaje) // si no tiene la palabra var dentro de la funcion la regla dice que se convierte en variable global
+
+    // como proteger nuestras variables de codigo de terceros
+
+    (function () {
+      var mensaje = 'hola mundo'
+
+      // codigo
+
+    } ())
+
+    // console.log(mensaje) no puede acceder a mensaje porque esta protegida en la funcion autoinvocada
+  </script>
+</body>
+
+</html>
