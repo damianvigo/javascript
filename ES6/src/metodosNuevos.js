@@ -8,7 +8,7 @@ const amigos = ['Damian', 'Daniel', 'Cesar', 'Manuel', 'Alejandro'];
 
 console.log(amigos.includes('Manuel')) // revisar con el metodo .includes si hay un elemento dentro del arreglo
 
-console.log(amigos.find( amigo => amigo.length > 6 )) // funcion de tipo flecha dentro del metodo .find
+console.log(amigos.find( amigo => amigo.length > 6 )) // funcion de tipo flecha dentro del metodo .find // devuelve el elemento que tenga una cantidad de caracteres mayor a 6
 
 console.log(amigos.findIndex( (amigo) => {
   return amigo === 'Manuel'
