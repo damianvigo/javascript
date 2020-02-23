@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Animaciones con Jquery</title>
+<style>
+  .caja {
+    width: 150px;
+    height: 150px;
+    background: #FF9900;
+  }
+
+  @keyframes colores {
+    0% {background: #FF9900}
+    50% {background: #424242}
+    100% {background: #FF9900}
+  }
+
+  .animacion {
+    animation: colores 3s ease;
+  }
+
+</style>
+</head>
+<body>
+  <button id="boton">Animar</button>
+  <br>
+  <div class="caja" id="caja"></div>
+
+  <script src="jquery-3.4.1.min.js"></script>
+  <script src="animaciones.js"></script>
+</body>
+</html>
