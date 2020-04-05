@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototipos JS</title>
+</head>
+<body>
+  <script>
+    
+    // POO 
+    /* 
+    Clases - Modelo a seguir del cual generamos varios objetos
+    Objetos - Es una instancia de una clase es decir una copia de ese modelo
+      Atributos - es una característica o propiedad del objeto (son variables dentro de un objeto)
+      Métodos - son las acciones que un objeto puede realizar (son funciones dentro de un objeto)
+    */
+
+    // ESTO NO ES FUNCIONAL PORQUE HAY QUE COPIAR Y PEGAR
+   /*  const animal = { 
+      nombre: 'Snoopy',
+      sonar() {
+        console.log('Hago sonidos porque estoy vivo');
+      }
+    }
+
+    const animal2 = {
+      nombre: 'Lola Bunny',
+      sonar() {
+        console.log('Hago sonidos porque estoy vivo');
+      }
+    }
+  
+
+    console.log(animal);
+    console.log(animal2); */
+
+    // Función constructora // se construye una sola vez y a partir de ella genero nuevas instancias o nuevos objetos
+   /*  function Animal (nombre, genero) {
+      this.nombre = nombre; // atributos de la funcion constructora
+      this.genero = genero;
+
+      //Métodos
+      this.sonar = function () {
+        console.log('Hago sonidos porque estoy vivo');
+      }
+
+      this.saludar = function () {
+        console.log(`Hola me llamo ${this.nombre}`);
+      }
+    } */
+
+    // Función constructora donde asgnamos los métodos al prototipo NO A LA FUNCIÓN COMO TAL. Así no se repiten las funciones dentro de mis instancias
+    function Animal (nombre, genero) {
+      // atributos de la funcion constructora // solo atributos para que no se repitan los metodos
+      this.nombre = nombre; 
+      this.genero = genero;
+    }
+
+       //Métodos agregados al prototipo de la función constructora
+        Animal.prototype.sonar = function () {
+        console.log('Hago sonidos porque estoy vivo');
+      }
+
+        Animal.prototype.saludar = function () {
+        console.log(`Hola me llamo ${this.nombre}`);
+      }
+
+      // Herencia Prototípica
+
+      function Perro (nombre, genero, tamanio) {
+        this.super = Animal // super es solo el nombre de la variable puede ser otro nombre. 
+        this.super(nombre, genero);
+        this.tamanio = tamanio; 
+      }
+      
+      // Perro está heredando de Animal // al hacer Perro.prototype = new Animal(); no se copia todo el prototipo de Animal en this.super = Animal
+      Perro.prototype = new Animal(); 
+      Perro.prototype.constructor = Perro;
+
+      //Sobreescritura de métodos del Prototipo padre en el hijo
+      Perro.prototype.sonar = function () {
+        console.log('Soy un perro y mi sonido es un ladrido');
+      }
+
+      Perro.prototype.ladrar = function () {
+        console.log('Guauu Guaaaau!!');
+      }
+
+    const snoopy = new Perro("Snoopy", 'Macho', 'Mediano'), // palabra reservada new, nos permite crear una nueva instancia es decir un nuevo objeto del tipo que le especifiquemos, nueva variable basada en la funcion constructora Animal
+       lolaBunny = new Animal('Lola Bunny', 'Hembra');
+
+    console.log(snoopy);
+    console.log(lolaBunny);
+
+    snoopy.saludar();
+    snoopy.sonar();
+    snoopy.ladrar();
+
+    lolaBunny.saludar();
+    lolaBunny.sonar();
+
+
+
+
+  </script>
+</body>
+</html>

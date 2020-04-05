@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clases en JavaScript</title>
+</head>
+<body>
+  <script>
+
+      // Sugar Sintax. JavaScript es un lenguaje orientado a objetos basado en prototipos.
+      // JavaScript sigue usando prototipos. Las clases simplifican la escritura ya que no hay que separar los metodos a prototipos para que no se duplique el codigo
+
+      class Animal {
+      // El constructor es un método especial que se ejecuta en el momento de instanciar la clase 
+      constructor(nombre, genero) {
+        this.nombre = nombre;
+        this.genero = genero;
+      }
+
+      //Métodos
+      sonar() {
+        console.log('Hago sonidos porque estoy vivo');
+      }
+
+      saludar() {
+        console.log(`Hola me llamo ${this.nombre}`);
+      }
+
+      // un método estático se pueden ejecutar sin necesidad de instanciar la clase
+      static queEres() {
+        console.log('Los perros somos animales mamíferos que pertenecemos a la familia de los caninos. Somos considerados los mejores amigos del hombre.');
+      }
+    } 
+
+    class Perro extends Animal {
+      constructor(nombre, genero, tamanio) {
+        // con el método super() se manda a llmar el constructor de la clase padre
+        super(nombre, genero);
+        this.tamanio = tamanio;
+        this.raza = null;
+      }
+      
+      sonar() {
+        console.log('Soy un perro y mi sonido es un ladrido');
+      }
+
+      ladrar() {
+        console.log('Guaaau Guaauuu!!!');
+      }
+
+      // Los setters y getters son métodos especiales que nos permiten establecer y obtener los valores de atributos de nuestra clase
+      get getRaza() { // método obtenedor de valor
+        return this.raza;
+      }
+
+      set setRaza(raza) { // método establecedor que modifica el valor de la propiedad
+        this.raza = raza;
+      }
+    }
+
+    Perro.queEres();
+
+    const mimi = new Animal('Mimi', 'Hembra'),
+        scooby = new Perro ('Scooby', 'Macho', 'Gigante');
+
+    console.log(mimi);
+    mimi.saludar();
+    mimi.sonar();
+    console.log(scooby);
+    scooby.saludar();
+    scooby.sonar();
+    scooby.ladrar();
+    console.log(scooby.getRaza);
+    // scooby.getRaza;  se tratan como una propiedad y NO UN METODO SIN PARENTESIS
+    scooby.setRaza = 'Grán Danés';
+    console.log(scooby.getRaza);
+
+
+
+
+  </script>
+</body>
+</html>
