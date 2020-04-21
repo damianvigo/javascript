@@ -22,8 +22,8 @@ const recortarTexto = (cadena = '', longitud = undefined) =>
   !cadena
     ? console.warn('No ingresaste una cadena de texto')
     : longitud === undefined
-    ? console.warn('No ingresaste la longitud para recortar el texto')
-    : console.info(cadena.slice(0, longitud));
+      ? console.warn('No ingresaste la longitud para recortar el texto')
+      : console.info(cadena.slice(0, longitud));
 
 recortarTexto('Texto recorte', 4);
 recortarTexto();
@@ -36,8 +36,8 @@ const cadenaAArray = (cadena = '', separador = undefined) =>
   !cadena
     ? console.warn('No ingresaste una cadena de texto')
     : separador === undefined
-    ? console.warn('No ingresaste el caracter separador')
-    : console.info(cadena.split(separador));
+      ? console.warn('No ingresaste el caracter separador')
+      : console.info(cadena.split(separador));
 
 cadenaAArray('Lorem Ipsum dolor sit amt consectur', ' ');
 cadenaAArray('Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic', ',');
@@ -125,8 +125,8 @@ const eliminarCaracteres = (texto = '', patron = '') =>
   !texto
     ? console.warn('No ingresaste un texto')
     : !patron
-    ? console.warn('No ingresaste un patrón de caracteres')
-    : console.info(texto.replace(new RegExp(patron, 'ig'), '')); // i detecta mayusculas o minisculas, g no se detiene en la primera coincidencia. Segundo parametro del replace nada '' no quiero que lo remplaza con nada
+      ? console.warn('No ingresaste un patrón de caracteres')
+      : console.info(texto.replace(new RegExp(patron, 'ig'), '')); // i detecta mayusculas o minisculas, g no se detiene en la primera coincidencia. Segundo parametro del replace nada '' no quiero que lo remplaza con nada
 
 eliminarCaracteres();
 eliminarCaracteres('xyz1, xyz2, xyz3, xyz4 y xyz5, xyz');
@@ -339,14 +339,108 @@ const calcularAnios = (fecha = undefined) => {
   return Math.sign(aniosHumanos) === -1
     ? console.info(`Faltan ${Math.abs(aniosHumanos)} años para el ${fecha.getFullYear()}`)
     : Math.sign(aniosHumanos) === 1
-    ? console.info(`Han pasado ${aniosHumanos} años, desde ${fecha.getFullYear()}`)
-    : console.info(`Estamos en el año actual ${fecha.getFullYear()}`);
+      ? console.info(`Han pasado ${aniosHumanos} años, desde ${fecha.getFullYear()}`)
+      : console.info(`Estamos en el año actual ${fecha.getFullYear()}`);
 };
 
 calcularAnios();
 calcularAnios({});
 calcularAnios(false);
 calcularAnios(new Date());
-calcularAnios(new Date(1988,0,15));
-calcularAnios(new Date(1888,0,15));
-calcularAnios(new Date(2088,0,15));
+calcularAnios(new Date(1988, 0, 15));
+calcularAnios(new Date(1888, 0, 15));
+calcularAnios(new Date(2088, 0, 15));
+
+// 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+const contarLetras = (cadena = '') => {
+  if (!cadena) return console.warn('No ingresaste una cadena de texto');
+
+  if (typeof cadena !== 'string') return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+
+  let vocales = 0,
+    consonantes = 0;
+
+  cadena = cadena.toLocaleLowerCase();
+
+  for (let letra of cadena) {
+    if (/[aeiouáéíóú]/.test(letra)) vocales++;
+
+    if (/[bcdfghjklmnñpqrstvwxyz]/.test(letra)) consonantes++;
+  }
+
+  return console.info({
+    cadena,
+    vocales,
+    consonantes,
+  });
+};
+
+contarLetras();
+contarLetras(3);
+contarLetras('Hola Mundo');
+contarLetras('Ñoño');
+
+// 19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+const validarNombre = (nombre = '') => {
+  if (!nombre) return console.warn('No ingresaste un nombre');
+
+  if (typeof nombre !== 'string') return console.error(`El valor "${nombre}" ingresado, NO es una cadena de texto`);
+
+  let expReg = /^[A-Za-zÑñAáÉéÍíÓóÚú\s]+$/g.test(nombre); // ^ circunflejo indica que no puede haber nada antes de la expresion y el dolar que no puede haber nada despues. [] son agrupadores el + para evaluarlo por cada caracter de la cadena de texto. \s acepta espacios en blanco. Metodo test evalua si se cumple o no.
+
+  return (expReg)
+    ? console.info(`"${nombre}", es un nombre válido`)
+    : console.warn(`"${nombre}", NO es un nombre válido`);
+};
+
+validarNombre();
+validarNombre(3);
+validarNombre('Damián Vigo');
+validarNombre('Damián Vigo, 19');
+
+// 20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+
+const validarEmail = (email = '') => {
+  if (!email) return console.warn('No ingresaste un email');
+
+  if (typeof email !== 'string') return console.error(`El valor "${email}" ingresado, NO es una cadena de texto`);
+
+  let expReg = /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
+
+  return (expReg)
+    ? console.info(`"${email}", es un email válido`)
+    : console.warn(`"${email}", NO es un email válido`);
+};
+
+validarEmail();
+validarEmail(30);
+validarEmail('damian,vigo@gmail');
+validarEmail('damiandanielvigo@gmail.com');
+
+/* Fusión 19 y 20 */
+
+const validarPatron = (cadena = '', patron = undefined) => {
+  if (!cadena) return console.warn('No ingresaste una cadena de texto a evaluar');
+
+  if (typeof cadena !== 'string') return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+
+  if (patron === undefined) return console.warn('No ingresaste un patrón a evaluar');
+
+  // Si el patron no es una expresion regular
+  if (!(patron instanceof RegExp)) return console.error(`El valor "${patron}" ingresado, NO es una expresión regular`);
+
+  let expReg = patron.test(cadena);
+
+  return (expReg)
+    ? console.info(`"${cadena}", cumple con el patrón ingresado`)
+    : console.warn(`"${cadena}", NO cumple con el patrón ingresado`);
+};
+
+validarPatron();
+validarPatron({});
+validarPatron("Hola Mundo");
+validarPatron("Hola Mundo", 'hola');
+validarPatron("Hola Mundo", [1, 2, 3]);
+validarPatron('Damián Vigo', /^[A-Za-zÑñAáÉéÍíÓóÚú\s]+$/g);
+validarPatron('damiandanielvigo@gmail.com', new RegExp('/[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/', 'i'));
+validarPatron('damiandaniel{{{vigo@gmail.com', new RegExp('/[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/', 'i'));
