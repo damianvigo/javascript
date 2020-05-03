@@ -615,9 +615,6 @@ console.clear()
 //   - Valida que la calificación sea un número entre 0 y 10 pudiendo ser
 //     decimal de una posición.
 //   - Crea un método que devuelva toda la ficha técnica de la película.
-//   - Apartir de un arreglo con la información de 3 películas genera 3
-//     instancias de la clase de forma automatizada e imprime la ficha técnica
-//     de cada película.
 
 // * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
 
@@ -636,6 +633,17 @@ class Pelicula {
     this.validarDirector(director);
     this.validarEstreno(estreno);
     this.validarPais(pais);
+    this.validarGeneros(generos);
+    this.validarCalificacion(calificacion);
+  }
+
+  static get listaGeneros() {
+    return ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical', 'Music', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western'];
+  }
+
+
+  static generosAceptados() {
+    return console.info(`Los géneros aceptados son: ${Pelicula.listaGeneros.join(", ")}`);
   }
 
   validarCadena(propiedad, valor) {
@@ -705,14 +713,40 @@ class Pelicula {
     this.validarArray('País', pais);
   }
 
+  validarGeneros(generos) {
+    if (this.validarArray('Géneros', generos)) {
+      for (let genero of generos) {
+        // console.log(genero, Pelicula.listaGeneros.includes(genero)) // metodos estaticos no necesitan usar this, porque no necesitan instancia para invocarse.
+        if (!Pelicula.listaGeneros.includes(genero)) {
+          console.error(`Genero(s) incorrectos "${generos.join(', ')}"`);
+          Pelicula.generosAceptados();
+        }
+      }
+    }
+  }
 
+  validarCalificacion(calificacion) {
+    if (this.validarNumero('Calificación', calificacion)) {
+      return (calificacion < 0 || calificacion > 10)
+        ? console.error(`La calificación tiene que estar en un rango entre 0 y 10`)
+        : this.calificacion = calificacion.toFixed(1); // cortar número decimal
+    }
+  }
 
+  fichaTecnica() {
+    console.info(`Ficha Técnica:\nTítulo: "${this.titulo}"\nDirector:" ${this.director}"\nAño:" ${this.estreno}"\nPaís: "${this.pais.join('-')}"\nGéneros: "${this.generos.join(', ')}"\nCaflificacion: "${this.calificacion}"\nIMDB id: "${this.id}"`)
+  }
 }
 
+Pelicula.generosAceptados();
 const peli = new Pelicula({
-  id: "tt1234567",
-  titulo: 'Título de la peli',
-  director: 'Director de la Peli',
-  estreno: 2020,
-  pais: ["Argentina"],
-})
+  id: "tt7286645",
+  titulo: 'Joker',
+  director: 'Todd Phillips',
+  estreno: 2019,
+  pais: ['US'],
+  generos: ['Crime', 'Drama'],
+  calificacion: 8.5,
+});
+
+peli.fichaTecnica();
