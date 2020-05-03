@@ -594,17 +594,9 @@ promedio();
 promedio({});
 promedio([]);
 promedio([2, true]);
-promedio([1,2,3,4,5,6,7,8,9,0]);
+promedio([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
 
-
-
-
-
-
-
-
-
-
+console.clear()
 
 // 27) Programa una clase llamada Pelicula.
 
@@ -628,3 +620,99 @@ promedio([1,2,3,4,5,6,7,8,9,0]);
 //     de cada película.
 
 // * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+
+class Pelicula {
+  constructor({ id, titulo, director, estreno, pais, generos, calificacion }) {
+    this.id = id;
+    this.titulo = titulo;
+    this.director = director;
+    this.estreno = estreno;
+    this.pais = pais;
+    this.generos = generos;
+    this.calificacion = calificacion;
+
+    this.validarIMDB(id);
+    this.validarTitulo(titulo);
+    this.validarDirector(director);
+    this.validarEstreno(estreno);
+    this.validarPais(pais);
+  }
+
+  validarCadena(propiedad, valor) {
+    if (!valor) return console.warn(`${propiedad} "${valor}" esta vacío`);
+    if (typeof valor !== "string") return console.error(`${propiedad} "${valor}" ingresado, NO es una cadena de texto`);
+
+    return true;
+  }
+
+  validarLongitudCadena(propiedad, valor, longitud) {
+    if (valor.length > longitud) return console.error(`${propiedad} "${valor}" excede el número de caracteres permitidos (${longitud})`);
+
+    return true;
+  }
+
+
+  validarNumero(propiedad, valor) {
+    if (!valor) return console.warn(`${propiedad} "${valor}" esta vacío}`);
+    if (typeof valor !== 'number') return console.error(`${propiedad} "${valor}" ingresado, NO es un número`);
+
+    return true;
+  }
+
+  validarArray(propiedad, valor) {
+    if (!valor) return console.warn(`${propiedad} "${valor}" esta vacío`);
+
+    if (!(valor instanceof Array)) return console.error(`${propiedad} "${valor}" ingresado, NO es un array`);
+
+    if (valor.length === 0) return console.error(`${propiedad} "${valor}" no tiene datos`);
+
+    for (let cadena of valor) {
+      if (typeof cadena !== 'string') return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+    }
+
+    return true;
+  }
+
+  validarIMDB(id) {
+    if (this.validarCadena('IMDB id', id)) {
+      if (!(/^([a-z]){2}([0-9]){7}$/.test(id))) { // no debe haber nada antes ^ | no debe haber nada despues $ | primeros 2 caracteres de la a la z y son 2
+        return console.error(`IMDB id "${id}" no es válido, debe tener 9 caracteres, los 2 primeras letras minúsculas y los 7 restantes números`);
+      }
+    }
+  }
+
+  validarTitulo(titulo) {
+    if (this.validarCadena('Título', titulo)) {
+      this.validarLongitudCadena('Título', titulo, 100);
+    }
+  }
+
+  validarDirector(director) {
+    if (this.validarCadena('Director', director)) {
+      this.validarLongitudCadena('Director', director, 50);
+    }
+  }
+
+  validarEstreno(estreno) {
+    if (this.validarNumero('Año de estreno', estreno)) {
+      if (!(/^([0-9]){4}$/.test(estreno))) { // no debe haber nada antes ^ | no debe haber nada despues $ | primeros 2 caracteres de la a la z y son 2
+        return console.error(`Año de Estreno "${estreno}" no es válido, debe ser un número de 4 digitos`);
+      }
+    }
+  }
+
+  validarPais(pais) {
+    this.validarArray('País', pais);
+  }
+
+
+
+}
+
+const peli = new Pelicula({
+  id: "tt1234567",
+  titulo: 'Título de la peli',
+  director: 'Director de la Peli',
+  estreno: 2020,
+  pais: ["Argentina"],
+})
