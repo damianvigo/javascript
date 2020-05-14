@@ -34,7 +34,7 @@ console.log(document.querySelector('#menu')); // A nivel de rendimiento es mas l
 console.log(document.querySelector('a'));
 console.log(document.querySelectorAll('a'));
 console.log(document.querySelectorAll('a').length);
-document.querySelectorAll('a').forEach(el => console.log(el));
+document.querySelectorAll('a').forEach((el) => console.log(el));
 console.log(document.querySelector('.card'));
 console.log(document.querySelectorAll('.card')[2]);
 console.log(document.querySelector('#menu li'));
@@ -82,7 +82,7 @@ console.log(getComputedStyle($linkDOM).getPropertyValue('color'));
 
 $linkDOM.style.setProperty('text-decoration', 'none');
 $linkDOM.style.setProperty('display', 'block');
-$linkDOM.style.width = "50%";
+$linkDOM.style.width = '50%';
 $linkDOM.style.textAlign = 'center';
 $linkDOM.style.marginLeft = 'auto';
 $linkDOM.style.marginRight = 'auto';
@@ -94,18 +94,186 @@ console.log($linkDOM.getAttribute('style')); // solo devuelve lo escrito en el a
 console.log(window.getComputedStyle($linkDOM));
 
 // Variables CSS - Custom Properties CSS
-const $html = document.documentElement,
-  $body = document.body;
+const $html = document.documentElement;
+//   $body = document.body;
 
-let varDarkColor = getComputedStyle($html).getPropertyValue('--dark-color'),
-  varYellowColor = getComputedStyle($html).getPropertyValue('--yellow-color');
+// let varDarkColor = getComputedStyle($html).getPropertyValue('--dark-color'),
+//   varYellowColor = getComputedStyle($html).getPropertyValue('--yellow-color');
 
-  console.log(varDarkColor, varYellowColor);
+//   console.log(varDarkColor, varYellowColor);
 
-  $body.style.backgroundColor = varDarkColor;
-  $body.style.color = varYellowColor;
+//   $body.style.backgroundColor = varDarkColor;
+//   $body.style.color = varYellowColor;
 
-  $html.style.setProperty('--dark-color', '#000');
-  varDarkColor = getComputedStyle($html).getPropertyValue('--dark-color');  
+//   $html.style.setProperty('--dark-color', '#000');
+//   varDarkColor = getComputedStyle($html).getPropertyValue('--dark-color');
 
-  $body.style.setProperty('background-color', varDarkColor);
+//   $body.style.setProperty('background-color', varDarkColor);
+
+console.log('***********Clases***************');
+const $card = document.querySelector('.card');
+console.log($card);
+console.log($card.className);
+console.log($card.classList);
+console.log($card.classList.contains('rotate-45')); // contains devuelve un boolean
+$card.classList.add('rotate-45');
+console.log($card.className);
+console.log($card.classList);
+$card.classList.remove('rotate-45');
+console.log($card.classList.contains('rotate-45'));
+$card.classList.toggle('rotate-45');
+console.log($card.classList.contains('rotate-45'));
+$card.classList.toggle('rotate-45');
+console.log($card.classList.contains('rotate-45'));
+$card.classList.toggle('rotate-45');
+$card.classList.replace('rotate-45', 'rotate-135');
+$card.classList.add('opacity-80', 'sepia');
+$card.classList.remove('opacity-80', 'sepia');
+$card.classList.toggle('opacity-80', 'sepia');
+
+console.log('************Texto y HTML**************');
+const $whatIsDOM = document.getElementById('que-es');
+
+let text = `
+  <p>
+  El Modelo de Objetos del Documento(<b><i>DOM - Document Object Model</i></b>) es un API para documentos HTML Y XML.
+  </p>
+  <p>
+  Éste proveé una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS
+  </p>
+  <p>
+  <mark>El DOM no es parte de la especificación de JavaScript, es una API para los navegadores</mark>
+  </p>
+`;
+
+// $whatIsDOM.innerText = text; no es parte del estandar, se creo para ie
+$whatIsDOM.textContent = text; // el estandar // insertar solo texto
+$whatIsDOM.innerHTML = text; // insertando texto y codigo html
+$whatIsDOM.outerHTML = text; // remplaza el elemento del dom por el contenido text
+
+console.log('************Traversing, recorriendo el DOM**************');
+/* const $cards = document.querySelector('.cards');
+console.log($cards);
+console.log($cards.children);
+console.log($cards.children[2]);
+console.log($cards.parentElement);
+console.log($cards.firstElementChild);
+console.log($cards.lastElementChild);
+console.log($cards.previousSibling); // devuelve text // es el espacio de la indentación entre el ancore y la section
+console.log($cards.previousElementSibling); // el ancore
+console.log($cards.nextElementSibling);
+console.log($cards.children[3].closest('section')); // referenca al 3er hijo de cards, cual es la section ancestral mas cercana */
+
+console.log('************Creando Elementos y fragmentos**************');
+const $figure = document.createElement('figure'),
+  $img = document.createElement('img'),
+  $figcaption = document.createElement('figcaption'),
+  $figcaptionText = document.createTextNode('Animals'),
+  $cards = document.querySelector('.cards'),
+  $figure2 = document.createElement('figure');
+
+$img.setAttribute('src', 'https://placeimg.com/200/200/animals');
+$img.setAttribute('alt', 'Animals');
+$figure.classList.add('card');
+
+$cards.appendChild($figure);
+$figure.appendChild($img);
+$figure.appendChild($figcaption);
+$figcaption.appendChild($figcaptionText);
+
+$figure2.innerHTML = `
+  <img src="https://placeimg.com/200/200/people" alt="People">
+  <figcaption>People</figcaption>
+`;
+
+$figure2.classList.add('card');
+$cards.appendChild($figure2);
+
+const estaciones = ['Primavera', 'Verano', 'Otoño', 'Invierno'];
+
+$ul = document.createElement('ul');
+
+document.write('<h3>Estaciones del año</h3>');
+document.body.appendChild($ul);
+
+estaciones.forEach(el => {
+  const $li = document.createElement('li');
+  $li.textContent = el;
+  $ul.appendChild($li);
+})
+
+const continentes = ['África', 'America', 'Asia', 'Europa', 'Oceania'],
+  $ul2 = document.createElement('ul');
+
+document.write('<h3>Continentes del Mundo</h3>');
+document.body.appendChild($ul2);
+
+$ul2.innerHTML = '';
+continentes.forEach(el => $ul2.innerHTML += `<li>${el}</li>`)
+
+// modo mas optimo para no pedir tanta demanda de recursos al navegador del cliente
+const meses = [
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre'
+],
+
+  $ul3 = document.createElement('ul'),
+  $fragment = document.createDocumentFragment();
+
+// modo mas optimo para no pedir tanta demanda de recursos al navegador del cliente
+meses.forEach(el => {
+  const $li = document.createElement('li');
+  $li.textContent = el;
+  $fragment.appendChild($li);
+});
+
+document.write('<h3>Meses del año</h3>')
+$ul3.appendChild($fragment);
+document.body.appendChild($ul3);
+
+console.log('**********Templates HTML***********');
+const $cards2 = document.querySelector('.cards'),
+  $template = document.getElementById('template-card').content,
+  $fragment2 = document.createDocumentFragment(),
+  cardContent = [
+    {
+      title: 'Tecnología',
+      img: 'https://placeimg.com/200/200/tech',
+    },
+    {
+      title: 'Animales',
+      img: 'https://placeimg.com/200/200/animals',
+    },
+    {
+      title: 'Arquitectura',
+      img: 'https://placeimg.com/200/200/arch',
+    },
+    {
+      title: 'Gente',
+      img: 'https://placeimg.com/200/200/people',
+    },
+    {
+      title: 'Naturaleza',
+      img: 'https://placeimg.com/200/200/nature',
+    },
+  ];
+
+cardContent.forEach(el => {
+  $template.querySelector('img').setAttribute('src', el.img);
+  $template.querySelector('img').setAttribute('alt', el.title);
+  $template.querySelector('figcaption').textContent = el.title;
+
+  let $clone = document.importNode($template, true);
+  $fragment2.appendChild($clone);
+})
+
+$cards2.appendChild($fragment2)
