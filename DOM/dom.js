@@ -277,3 +277,62 @@ cardContent.forEach(el => {
 })
 
 $cards2.appendChild($fragment2)
+
+console.log('*********Modificando Elementos (Old Style)**********');
+// const $cards3 = document.querySelector('.cards'),
+//   $newCard = document.createElement('figure'),
+//   $cloneCards = $cards3.cloneNode(true);
+
+// $newCard.innerHTML = `
+//   <img src="https://placeimg.com/200/200/any" alt="Any" />
+//   `;
+// $newCard.classList.add('card');
+
+// // $cards3.replaceChild($newCard, $cards.children[2]);
+// $cards3.insertBefore($newCard, $cards3.firstElementChild);
+// $cards3.removeChild($cards3.lastElementChild);
+// document.body.appendChild($cloneCards);
+
+console.log('***********Modificando elementos (Cool Style)***************');
+/*
+
+InsertAdjacent...
+  .insertAdjacentElement(position, el)
+  .insertAdjacentHTML(position, html)
+  ,insertAdjacentText(position, text)
+
+Posiciones:
+  beforebegin(hermano anterior)
+  afterbegin(primer hijo)
+  beforeend(ultimo hijo)
+  afterend(hermano siguiente)
+*/
+
+const $cards3 = document.querySelector('.cards'),
+  $newCard = document.createElement('figure');
+
+// $newCard.innerHTML = `
+//   <img src="https://placeimg.com/200/200/any" alt="Any" />  
+//   <figcaption>Any</figcaption>
+//   `;
+
+let $contentCard = `
+  <img src="https://placeimg.com/200/200/any" alt="Any" />  
+  <figcaption></figcaption>
+  `;
+
+$newCard.classList.add('card');
+
+// $cards3.insertAdjacentElement('beforebegin', $newCard);
+$cards3.insertAdjacentElement('afterbegin', $newCard);
+// $cards3.insertAdjacentElement('beforeend', $newCard);
+// $cards3.insertAdjacentElement('afterend', $newCard);
+
+$newCard.insertAdjacentHTML('beforeend', $contentCard); // da lo mismo afterbegin o beforebegin
+$newCard.querySelector('figcaption').insertAdjacentText('afterbegin', 'Any');
+
+// jQuery metodos nativos en js
+// $cards3.prepend($newCard);  // primer hijo
+// $cards3.before($newCard);  // hermano anterior de la section cards
+// $cards3.append($newCard); // ultimo hijo
+// $cards3.after($newCard); // hermano posterior de la section cards
