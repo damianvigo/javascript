@@ -196,11 +196,11 @@ $ul = document.createElement('ul');
 document.write('<h3>Estaciones del año</h3>');
 document.body.appendChild($ul);
 
-estaciones.forEach(el => {
+estaciones.forEach((el) => {
   const $li = document.createElement('li');
   $li.textContent = el;
   $ul.appendChild($li);
-})
+});
 
 const continentes = ['África', 'America', 'Asia', 'Europa', 'Oceania'],
   $ul2 = document.createElement('ul');
@@ -209,34 +209,21 @@ document.write('<h3>Continentes del Mundo</h3>');
 document.body.appendChild($ul2);
 
 $ul2.innerHTML = '';
-continentes.forEach(el => $ul2.innerHTML += `<li>${el}</li>`)
+continentes.forEach((el) => ($ul2.innerHTML += `<li>${el}</li>`));
 
-// modo mas optimo para no pedir tanta demanda de recursos al navegador del cliente
-const meses = [
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Agosto',
-  'Septiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre'
-],
-
+// modo mas optimo para no pedir tanta demanda de recursos al navegador
+const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
   $ul3 = document.createElement('ul'),
   $fragment = document.createDocumentFragment();
 
-// modo mas optimo para no pedir tanta demanda de recursos al navegador del cliente
-meses.forEach(el => {
+// modo mas optimo para no pedir tanta demanda de recursos al navegador
+meses.forEach((el) => {
   const $li = document.createElement('li');
   $li.textContent = el;
   $fragment.appendChild($li);
 });
 
-document.write('<h3>Meses del año</h3>')
+document.write('<h3>Meses del año</h3>');
 $ul3.appendChild($fragment);
 document.body.appendChild($ul3);
 
@@ -267,16 +254,16 @@ const $cards2 = document.querySelector('.cards'),
     },
   ];
 
-cardContent.forEach(el => {
+cardContent.forEach((el) => {
   $template.querySelector('img').setAttribute('src', el.img);
   $template.querySelector('img').setAttribute('alt', el.title);
   $template.querySelector('figcaption').textContent = el.title;
 
   let $clone = document.importNode($template, true);
   $fragment2.appendChild($clone);
-})
+});
 
-$cards2.appendChild($fragment2)
+$cards2.appendChild($fragment2);
 
 console.log('*********Modificando Elementos (Old Style)**********');
 // const $cards3 = document.querySelector('.cards'),
@@ -312,7 +299,7 @@ const $cards3 = document.querySelector('.cards'),
   $newCard = document.createElement('figure');
 
 // $newCard.innerHTML = `
-//   <img src="https://placeimg.com/200/200/any" alt="Any" />  
+//   <img src="https://placeimg.com/200/200/any" alt="Any" />
 //   <figcaption>Any</figcaption>
 //   `;
 
@@ -336,3 +323,28 @@ $newCard.querySelector('figcaption').insertAdjacentText('afterbegin', 'Any');
 // $cards3.before($newCard);  // hermano anterior de la section cards
 // $cards3.append($newCard); // ultimo hijo
 // $cards3.after($newCard); // hermano posterior de la section cards
+
+console.log('***************Events**************');
+function Hey() {
+  alert('Hey');
+  console.log(event);
+}
+
+const $eventoSemantico = document.getElementById('evento-semantico');
+
+$eventoSemantico.onclick = Hey;
+$eventoSemantico.onclick = function (e) {
+  alert('Manejador de eventos semántico');
+  console.log(e);
+  console.log(event);
+};
+
+const $eventomultiple = document.getElementById('evento-multiple');
+$eventomultiple.addEventListener('click', Hey);
+$eventomultiple.addEventListener('click', (e) => {
+  alert('Manejador de eventos múltiples');
+  console.log(e);
+  console.log(e.type);
+  console.log(e.target);
+  console.log(event);
+});
