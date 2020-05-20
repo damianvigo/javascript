@@ -325,7 +325,7 @@ $newCard.querySelector('figcaption').insertAdjacentText('afterbegin', 'Any');
 // $cards3.after($newCard); // hermano posterior de la section cards
 
 console.log('***************Events**************');
-function Hey() {
+/* function Hey() {
   alert('Hey');
   console.log(event);
 }
@@ -339,6 +339,11 @@ $eventoSemantico.onclick = function (e) {
   console.log(event);
 };
 
+function saludar(nombre = 'Desconocido') {
+  alert(`Hola ${nombre}`);
+  console.log(event);
+}
+
 const $eventomultiple = document.getElementById('evento-multiple');
 $eventomultiple.addEventListener('click', Hey);
 $eventomultiple.addEventListener('click', (e) => {
@@ -347,4 +352,44 @@ $eventomultiple.addEventListener('click', (e) => {
   console.log(e.type);
   console.log(e.target);
   console.log(event);
+});
+
+$eventomultiple.addEventListener('click', () => {
+  saludar();
+  saludar('Dami');
+});
+
+//
+
+const $eventoRemover = document.getElementById('evento-remover');
+
+const removerDobleClick = (e) => {
+  alert(`Removiendo el evento de tipo ${e.type}`);
+  console.log(e);
+  $eventoRemover.removeEventListener('dblclick', removerDobleClick);
+  $eventoRemover.disabled = true;
+};
+
+$eventoRemover.addEventListener('dblclick', removerDobleClick);
+ */
+
+const $divsEventos = document.querySelectorAll('.eventos-flujo div');
+
+function flujoEventos(e) {
+  console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+}
+
+console.log($divsEventos);
+
+$divsEventos.forEach((div) => {
+  // estan relacionados con el tercer parametro de la fn addEventListener
+  // Fase de burbuja // del elemento interno al externo
+  // div.addEventListener('click', flujoEventos); / por defecto en false
+  // div.addEventListener('click', flujoEventos, false); // tercer parametro por defecto en false explicito
+  // Fase de captura // del elemento exterior al interior
+  // div.addEventListener('click', flujoEventos, true);
+  div.addEventListener('click', flujoEventos, {
+    capture: false,
+    once: true, // se ejecuta una sola vez
+  });
 });
