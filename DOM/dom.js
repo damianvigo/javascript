@@ -373,10 +373,12 @@ const removerDobleClick = (e) => {
 $eventoRemover.addEventListener('dblclick', removerDobleClick);
  */
 
-const $divsEventos = document.querySelectorAll('.eventos-flujo div');
+const $divsEventos = document.querySelectorAll('.eventos-flujo div'),
+  $linkEventos = document.querySelector('.eventos-flujo a'); // primer enlace
 
 function flujoEventos(e) {
   console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+  e.stopPropagation();
 }
 
 console.log($divsEventos);
@@ -384,12 +386,20 @@ console.log($divsEventos);
 $divsEventos.forEach((div) => {
   // estan relacionados con el tercer parametro de la fn addEventListener
   // Fase de burbuja // del elemento interno al externo
-  // div.addEventListener('click', flujoEventos); / por defecto en false
+  div.addEventListener('click', flujoEventos); // por defecto en false
   // div.addEventListener('click', flujoEventos, false); // tercer parametro por defecto en false explicito
   // Fase de captura // del elemento exterior al interior
   // div.addEventListener('click', flujoEventos, true);
-  div.addEventListener('click', flujoEventos, {
-    capture: false,
-    once: true, // se ejecuta una sola vez
-  });
+  // div.addEventListener('click', flujoEventos, {
+  //   capture: false,
+  //   once: true,  se ejecuta una sola vez
+  // });
 });
+
+$linkEventos.addEventListener('click', (e) => {
+  alert('Hola');
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+console.log('*************stopPropagation & preventDefault***************');
