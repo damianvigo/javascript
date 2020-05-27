@@ -452,3 +452,21 @@ document.addEventListener('DOMContentLoaded', (e) => {
   console.log(window.screenY);
   console.log(e);
 });
+
+let ventana;
+
+const $btnAbrir = document.getElementById('abrir-ventana'),
+  $btnCerrar = document.getElementById('cerrar-ventana'),
+  $btnImprimir = document.getElementById('imprimir-ventana');
+
+$btnAbrir.addEventListener('click', e => {
+  // window.open('https://damianvigo.com');
+  ventana = open('https://damianvigo.com');
+});
+$btnCerrar.addEventListener('click', e => {
+  // window.close();
+  ventana.close();
+});
+$btnImprimir.addEventListener('click', e => {
+  window.print();
+});
