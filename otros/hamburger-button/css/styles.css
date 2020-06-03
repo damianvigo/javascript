@@ -124,7 +124,7 @@ header h1 {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .panel-btn {
     display: block;
   }
