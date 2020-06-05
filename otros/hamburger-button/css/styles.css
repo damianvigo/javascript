@@ -124,6 +124,21 @@ header h1 {
   display: none;
 }
 
+/* ********** Eventos del Teclado **********  */
+.stage {
+  display: flex;
+  min-height: 50vh;
+  background-color: var(--second-color);
+}
+
+.ball {
+  margin: auto;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
 @media screen and (max-width: 768px) {
   .panel-btn {
     display: block;
