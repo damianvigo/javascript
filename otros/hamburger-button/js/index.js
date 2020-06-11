@@ -13,10 +13,11 @@ d.addEventListener('DOMContentLoaded', (e) => {
   alarm('assets/end-of-time-alan-walker.ogg', '#activar-alarma', '#desactivar-alarma');
   // countdown('countdown', 'dic 25, 2020 00:00:00', 'Merry Christmas');
   scrollTopButton('.scroll-top-btn');
-  darkTheme('.dark-theme-btn', 'dark-mode');
 });
 
 d.addEventListener('keydown', (e) => {
   shortcuts(e);
   moveBall(e, '.ball', '.stage');
 });
+
+darkTheme('.dark-theme-btn', 'dark-mode');
