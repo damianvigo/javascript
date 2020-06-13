@@ -14,8 +14,18 @@ d.addEventListener('DOMContentLoaded', (e) => {
   alarm('assets/end-of-time-alan-walker.ogg', '#activar-alarma', '#desactivar-alarma');
   // countdown('countdown', 'dic 25, 2020 00:00:00', 'Merry Christmas');
   scrollTopButton('.scroll-top-btn');
-  responsiveMedia('youtube', '(min-width: 1024px)', 'Contenido Móvil', 'Contenido Escritorio');
-  responsiveMedia('gmaps', '(min-width: 1024px)', 'Contenido Móvil', 'Contenido Escritorio');
+  responsiveMedia(
+    'youtube',
+    '(min-width: 1024px)',
+    `<a href="https://www.youtube.com/watch?v=Oj18EikZMuU" target="_blank" rel="noopener">Ver Video</a>`,
+    `<iframe width="560" height="315" src="https://www.youtube.com/embed/Oj18EikZMuU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  );
+  responsiveMedia(
+    'gmaps',
+    '(min-width: 1024px)',
+    `<a href="https://goo.gl/maps/75f9Y64oLKKfHQsY9" target="_blank" rel="noopener">Ver Mapa</a>`,
+    `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.016887889461!2d-58.38375908423685!3d-34.60373446500705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4aa9f0a6da5edb%3A0x11bead4e234e558b!2sObelisco!5e0!3m2!1ses-419!2sar!4v1592017701759!5m2!1ses-419!2sar" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>`
+  );
 });
 
 d.addEventListener('keydown', (e) => {
