@@ -7,6 +7,8 @@ import darkTheme from './modules/tema_oscuro.js';
 import responsiveMedia from './modules/objeto_responsive.js';
 import responsiveTester from './modules/prueba_responsive.js';
 import userDeviceInfo from './modules/deteccion_dispositivos.js';
+import networkStatus from './modules/deteccion_red.js';
+import webCam from './modules/deteccion_webcam.js';
 
 const d = document;
 
@@ -31,6 +33,7 @@ d.addEventListener('DOMContentLoaded', (e) => {
   // usandogetElementById no necesita poner el hash
   responsiveTester('responsive-tester');
   userDeviceInfo('user-device');
+  webCam('webcam');
 });
 
 d.addEventListener('keydown', (e) => {
@@ -39,3 +42,4 @@ d.addEventListener('keydown', (e) => {
 });
 
 darkTheme('.dark-theme-btn', 'dark-mode');
+networkStatus();
