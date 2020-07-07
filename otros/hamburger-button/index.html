@@ -36,7 +36,7 @@
       <a href="#seccion11" data-scroll-spy></a>Sorteo Digital</a>
       <a href="#seccion12" data-scroll-spy>Responsive Slider</a>
       <a href="#seccion13" data-scroll-spy>Video Inteligente</a>
-      <a href="#seccion14" data-scroll-spy>14</a>
+      <a href="#seccion14" data-scroll-spy>Validaciones de formulario</a>
       <a href="#seccion15" data-scroll-spy>15</a>
     </nav>
   </aside>
@@ -198,7 +198,35 @@
       <video src="./assets/time.mp4" width="720px" muted controls loop data-smart-video></video>
     </section>
     <section id="seccion14" class="section" data-scroll-spy>
-      <h2></h2>
+
+      <h2>Validaciones Fe formulario</h2>
+
+      <form class="contact-form">
+
+        <legend>Envíanos tus comentarios</legend>
+        <input type="text" name="name" placeholder="Escribe tu nombre"
+          title="Nombre sólo acepta letras y espacios en blanco" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
+        <input type="email" name="email" placeholder="Escribe tu email" title="Email incorrecto"
+          pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
+        <!-- required en type email solo valida que haya un texto atras y despues del @ es insuficiente ya que un 1231@12312 no es un email valido. se aplica expresión regular -->
+        <input type="text" name="subject" placeholder="Asunto a tratar" required title="El Asunto es requerido">
+        <textarea name="comments" cols="50" rows="5" placeholder="Escribe tus comentarios" required
+          data-pattern="^.{1,255}$" title="Tu comentario no debe exceder los 255 caracteres"></textarea>
+        <!-- pattern no es un atributo valido para textarea -->
+        <input type="submit" value="Enviar">
+
+        <div class="contact-form-loader none">
+          <!-- de inicio no se ven -->
+          <img src="./assets//ball-triangle.svg" alt="Cargando">
+        </div>
+
+        <div class="contact-form-response none">
+          <!-- de inicio no se ven -->
+          <p>Los datos han sido enviados</p>
+        </div>
+
+      </form>
+
     </section>
     <section id="seccion15" class="section" data-scroll-spy>
       <h2></h2>
