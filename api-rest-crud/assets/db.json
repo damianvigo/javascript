@@ -44,6 +44,11 @@
       "nombre": "Shura",
       "constelacion": "capricornio",
       "id": 9
+    },
+    {
+      "nombre": "aioria",
+      "constelacion": "leo",
+      "id": 10
     }
   ],
   "dioses": [
