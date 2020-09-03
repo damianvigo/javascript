@@ -32,7 +32,7 @@ body {
 .img:hover {
   filter: grayscale(50%);
   cursor: pointer;
-  transition: filter .5s;
+  transition: filter 0.5s;
 }
 
 .img-1 {
@@ -67,16 +67,27 @@ body {
   top: 0;
   left: 0;
   transform: translateX(-100%);
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.4s ease-in;
+}
+
+.move {
+  transform: translateX(0);
 }
 
 .img-show {
   height: 80%;
+  transform: scale(0);
   display: block;
   object-fit: cover;
+  transition: transform 0.2s 0.4s; /* esperar 4s para que se ejecute */
+}
+
+.show {
+  transform: scale(1);
 }
 
 .copy {
@@ -92,4 +103,19 @@ body {
   right: 10px;
   font-size: 40px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+  .img-show {
+    width: 90%;
+  }
+
+  .copy {
+    bottom: 20px;
+  }
+
+  .bx.bx-x {
+    top: 10px;
+    font-size: 25px;
+  }
 }
