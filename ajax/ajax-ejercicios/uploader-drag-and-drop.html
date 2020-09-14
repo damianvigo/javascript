@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uploader con AJAX</title>
+  <title>Uploader Drag & Drop con AJAX</title>
   <style>
     html {
       box-sizing: border-box;
@@ -16,6 +16,10 @@
     *::before,
     *::after {
       box-sizing: inherit;
+    }
+
+    body {
+      margin: 0;
     }
 
     main {
@@ -30,22 +34,51 @@
     progress {
       margin-top: 1rem;
     }
+
+    .drop-zone {
+      margin-left: auto;
+      margin-right: auto;
+      border: thin dotted #000;
+      width: 80%;
+      height: 40vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* cuando la clase drop-zone a parte tenga la clase is-active */
+    .drop-zone.is-active {
+      border: thick dashed #000;
+      background-color: rgba(0, 128, 0, .5);
+      animation: pulse 1.5s infinite;
+      animation-timing-function: linear;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
   </style>
 </head>
 
 <body>
   <main>
-    <!-- gracias al API de files, de subir archivos no hace falta crear un form para el input -->
-    <input type="file" id="files" name="files" multiple />
-    <!--     <progress value='70' max='100'></progress>
-    70% - nombre_archivo.txt
-    <progress value='70' max='100'></progress>
-    70% - nombre_archivo.txt -->
+    <article class="drop-zone">
+      <p>Arrastra y suelta tus archivos...</p>
+    </article>
   </main>
   <script>
     const d = document,
       $main = d.querySelector('main'),
-      $files = d.getElementById('files');
+      $dropZone = d.querySelector('.drop-zone');
 
     const uploader = (file) => {
       // console.log(file);
@@ -98,21 +131,32 @@
         setTimeout(() => {
           $main.removeChild($progress);
           $main.removeChild($span);
-          $files.value = '';
         }, 3000);
       });
-    }
+    };
 
-    d.addEventListener('change', e => {
-      if (e.target === $files) {
-        // console.log(e);
-        // console.log(e.target.files);
-
-        const files = Array.from(e.target.files); /* convirtiendo el objeto a array para iterarlo con foreach */
-        // console.log(files)
-        files.forEach(el => progressUpload(el));
-      }
+    /* sobre el elemento y arrastrarlo. No hace falta especificar como en el input -multiple- archivos*/
+    $dropZone.addEventListener('dragover', e => {
+      // console.log(e);
+      e.preventDefault();
+      e.stopPropagation();
+      e.target.classList.add('is-active');
     });
+    $dropZone.addEventListener('dragleave', e => {
+      // console.log(e);
+      e.preventDefault();
+      e.stopPropagation();
+      e.target.classList.remove('is-active');
+    });
+    $dropZone.addEventListener('drop', e => {
+      console.log(e);
+      e.preventDefault();
+      e.stopPropagation();
+      const files = Array.from(e.dataTransfer.files);
+      files.forEach(el => progressUpload(el));
+      e.target.classList.remove('is-active');
+    });
+
   </script>
 </body>
 
