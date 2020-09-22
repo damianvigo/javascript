@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPress REST API</title>
+</head>
+
+<body>
+  <h1>WordPress REST API</h1>
+  <article id="site" class="site"></article>
+  <section id="posts" class="posts"></section>
+  <img src="../assets/ball-triangle.svg" alt="Cargando..." class="loader" />
+
+  <template id="post-template">
+    <article class="post">
+      <img class="post-image" />
+      <aside>
+        <h2 class="post-title"></h2>
+        <figure class="post-author"></figure>
+        <small class="post-date"></small>
+        <a class="post-link" target='_blank'>Ver publicacion original</a>
+        <p class="post-excerpt"></p>
+        <div class="post-categories"></div>
+        <div class="post-tags"></div>
+        <details class="post-content">
+          <summary>Ver contenido de la publicacion</summary>
+          <article></article>
+        </details>
+      </aside>
+    </article>
+    <hr />
+  </template>
+  <script>
+    const d = document,
+      $site = d.getElementById('site'),
+      $posts = d.getElementById('posts'),
+      $loader = d.querySelector('.loader'),
+      $template = d.getElementById('post-template').content,
+      $fragment = d.createDocumentFragment(),
+      DOMAIN = 'https://malvestida.com',
+      SITE = `${DOMAIN}/wp-json`,
+      API_WP = `${SITE}/wp/v2`, // api nativa de wordpress. informacion nativa de todo sitio en wordpress
+      POSTS = `${API_WP}/posts`,
+      PAGES = `${API_WP}/pages`,
+      CATEGORIES = `${API_WP}/categories`;
+
+    /*       fetch(POSTS)
+            .then(res => res.ok ? res.json() : Promise.reject(res))
+            .then(json => {
+              console.log(json);
+            }); */
+
+    function getSiteData() {
+      fetch(SITE)
+        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(json => {
+          console.log(json);
+          $site.innerHTML = `
+            <h2>Sitio Web</h2>
+            <h3>
+              <a href='${json.url}' target='_blank'>${json.name}</a>
+            </h3>
+            <p>${json.description}</p>
+            <p>${json.timezone_string}</p>
+          `;
+        })
+        .catch(err => {
+          console.log(err);
+          let message = err.statusText || 'Ocurrio un error';
+          $site.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+        });
+    }
+
+    function getPosts() {
+      fetch(POSTS)
+        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(json => {
+          console.log(json);
+        })
+        .catch(err => {
+          console.log(err);
+          let message = err.statusText || 'Ocurrio un error';
+          $posts.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+          $loader.style.display = 'none';
+        });
+    }
+
+    d.addEventListener('DOMContentLoaded', e => {
+      getSiteData();
+      getPosts();
+    })
+  </script>
+</body>
+
+</html>
