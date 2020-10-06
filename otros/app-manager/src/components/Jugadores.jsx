@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  agregarTitular(jugador) {  
+  agregarTitular(jugador) {
     dispatch({
       type: 'AGREGAR_TITULAR',
       jugador,
