@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { appearFromTop } from '../../styles/animation'
 
 export const List = styled.ul`
@@ -8,7 +8,8 @@ export const List = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  &.fixed {
+  ${props => props.fixed && css`
+    {
     background: #fff;
     border-radius: 60px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .3);
@@ -27,6 +28,8 @@ export const List = styled.ul`
       to: '-40px'
     })}
   }
+`
+}
 `
 
 export const Item = styled.li`
