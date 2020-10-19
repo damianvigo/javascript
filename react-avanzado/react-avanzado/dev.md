@@ -13,3 +13,7 @@
 ### npm i react-icons
 
 ### npm i intersection-observer
+
+### npm i apollo-boost react-apollo graphql
+
+hoc ** high order component **
