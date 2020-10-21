@@ -8,7 +8,7 @@
     "build": "webpack",
     "lint": "standard",
     "lint-fix": "standard --fix",
-    "dev": "webpack serve",
+    "dev": "webpack serve --history-api-fallback",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Damian Vigo <damiandanielvigo@gmail.com> (https://damianvigo.com)",
@@ -25,6 +25,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@reach/router": "^1.3.4",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.3.0",
     "intersection-observer": "^0.11.0",
