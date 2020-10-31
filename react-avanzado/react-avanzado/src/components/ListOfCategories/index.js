@@ -4,6 +4,7 @@ import { Category } from '../Category'
 import { List, Item } from './styles'
 /* import { categories as mockCategories } from '../../../api/db.json' */
 
+/* Custom Hooks */
 function useCategoriesData () {
   /* console.log(categories) */
   const [categories, setCategories] = useState([])
