@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { UserForm } from '../components/UserForm'
 import Context from '../Context'
+import { RegisterMutation } from '../container/RegisterMutation'
 
 export const NotRegisteredUser = () => (
   <Context.Consumer>
     {
       ({ activateAuth }) => {
         return (
-          <UserForm onSubmit={activateAuth} />
+          <Fragment>
+            <RegisterMutation>
+              {
+                (register, { data, loading, error}) => {
+                  const onSubmit = ({email, password}) => {
+                    const input = {email, password}
+                    const variables = { input }
+                    register({ variables }).then(activateAuth)
+                  }
+
+                  const errorMsg = error && 'El usuario ya existe o hay algún problema'
+
+                  return <UserForm disabled={loading} error={errorMsg} title='Registrarse' onSubmit={onSubmit} />
+                }
+              }
+            </RegisterMutation>
+            <UserForm title='Iniciar Sesion' onSubmit={activateAuth} />
+          </Fragment>
         )
       }
     }
