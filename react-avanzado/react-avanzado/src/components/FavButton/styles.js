@@ -9,4 +9,5 @@ export const Button = styled.button`
   }
   background-color: transparent;
   border: 0px;
+  outline: none;
 `
