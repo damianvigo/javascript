@@ -6,7 +6,6 @@ const Provider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(() => {
     return window.sessionStorage.getItem('token')
   })
-
   const value = {
     isAuth,
     activateAuth: token => {
@@ -21,7 +20,7 @@ const Provider = ({ children }) => {
 
   return (
     <Context.Provider value={value}>
-        {children}
+      {children}
     </Context.Provider>
   )
 }
