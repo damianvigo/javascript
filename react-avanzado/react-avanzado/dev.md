@@ -21,3 +21,11 @@ hoc ** high order component **
 ### npm i @reach/router
 
 ###  npm i react-helmet
+
+### npm i prop-types
+
+### npm i webpack-pwa-manifest -D
+
+### npm i workbox-webpack-plugin -D
+
+### npm i cypress -D ./node_modules/.bin/cypress open

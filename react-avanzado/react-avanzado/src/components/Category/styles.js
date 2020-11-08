@@ -18,3 +18,7 @@ export const Image = styled.img`
   height: 75px;
   width: 75px;
 `
+
+export const Emoji = styled.i`
+  margin: 5px 0
+`

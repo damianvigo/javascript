@@ -14,7 +14,7 @@ const HomePage = (path) => {
 }
 
 export const Home = React.memo(HomePage, (prevProps, props) => {
-  console.log(prevProps)
-  console.log(props)
+  /* console.log(prevProps)
+  console.log(props) */
   return prevProps.id === props.id
 })

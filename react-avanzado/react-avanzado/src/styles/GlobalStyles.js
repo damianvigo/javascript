@@ -32,6 +32,7 @@ body {
   max-width: 500px;
   overscroll-behavior: none;
   width: 100%;
+  font-family: 'Raleway', sans-serif;
 }
 
 #app {

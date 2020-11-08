@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Form = styled.form`
   padding: 16px 0;
+  width: 80%;
+  margin: 0 auto;
 `
 
 export const Input = styled.input`
@@ -25,4 +27,7 @@ export const Title = styled.h2`
 export const Error = styled.span`
   font-size: 14px;
   color: red;
+  display: block;
+  width: 70%;
+  margin: 0 auto;
 `
