@@ -2,6 +2,7 @@ import { ajax } from '../helpers/ajax.js'
 import api from '../helpers/wp_api.js'
 import { Post } from './Post.js';
 import { PostCard } from './PostCard.js';
+import { SearchCard } from './SearchCard.js';
 
 export async function Router() {
   const d = document,
@@ -26,8 +27,32 @@ export async function Router() {
     });
     console.log(api)
   } else if (hash.includes('#/search')) {
-    $main.innerHTML = '<h2>Seccion del Buscador</h2>';
     /*  d.querySelector('.loader').style.display = 'none'; */
+    let query = localStorage.getItem('wpSearch');
+
+    if (!query) {
+      d.querySelector('.loader').style.display = 'none';
+      return false;
+    }
+
+    await ajax({
+      url: `${api.SEARCH}${query}`,
+      cbSuccess: (search) => {
+        console.log(search);
+        let html = '';
+        if (search.length === 0) {
+          html = `
+            <p class='error'>
+              No existen resultados de busqueda para el termino <mark>${query}</mark>
+            </p>
+          `;
+        } else {
+          search.forEach(post => html += SearchCard(post));
+        }
+        $main.innerHTML = html;
+      }
+    });
+
   } else if (hash.includes('#/contacto')) {
     $main.innerHTML = '<h2>Seccion de Contacto</h2>';
     /*  d.querySelector('.loader').style.display = 'none'; */
