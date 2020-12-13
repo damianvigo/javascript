@@ -229,3 +229,47 @@ img {
   grid-row: 2/4;
 }
 
+.grid-order {
+  display: grid;
+  /* Grid 3cx2r */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  /* grid-auto-flow: column; */
+}
+
+.grid-order .item:nth-child(1) {
+  /* default es 0, -1 0 1 */
+  order: 1;
+}
+
+.grid-order .item:nth-child(2) {
+  /* default es 0, -1 0 1 */
+  order: 2;
+}
+
+.grid-order .item:nth-child(5) {
+  /* default es 0, -1 0 1 */
+  order: -1; /* primero */
+}
+
+.grid-align {
+  display: grid;
+  /* Grid 3cx2r */
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 200px);
+  /* justify-items: alinea mis elementos grid en el eje horizontal (X) */
+  justify-items: stretch;
+  justify-items: start;
+  justify-items: end;
+  justify-items: center;
+  /* align-items: alinea mis elementos grid en el eje vertical (Y) */
+  align-items: stretch;
+  align-items: start;
+  align-items: end;
+  align-items: center;
+}
+
+.grid-align .item:nth-child(4) {
+  justify-self: start;
+  align-self: start;
+}
