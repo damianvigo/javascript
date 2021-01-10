@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-rou
 import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
 import Nosotros from './components/Nosotros';
+import Civilization from './components/Civilization';
 
 function App() {
   return (
@@ -22,17 +23,22 @@ function App() {
         </div>
         <hr />
         <Switch>
+        <Route exact path="/nosotros/:id">
+          <Civilization />
+        </Route>
+        </Switch>
+        <Switch>
           <Route exact path='/'>
             <Inicio />
           </Route>
         </Switch>
         <Switch>
-          <Route path='/contacto'>
+          <Route exact path='/contacto'>
             <Contacto />
           </Route>
         </Switch>
         <Switch>
-          <Route path='/nosotros'>
+          <Route exact path='/nosotros'>
             <Nosotros />
           </Route>
         </Switch>

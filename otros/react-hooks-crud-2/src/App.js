@@ -23,7 +23,7 @@ function App() {
   // Eliminar Usuarios
   const deleteUser = (id) => {
     const arrayFiltrador = users.filter((user) => user.id !== id);
-
+    console.log(arrayFiltrador);
     setUsers(arrayFiltrador);
   };
 
