@@ -46,33 +46,46 @@
       <span id="final-price">-</span>
     </p>
     <div>
-      <button type="button">Regatear</button>
+      <button id="make-offer" type="button">Regatear</button>
     </div>
   </div>
 
   <script>
-    const price = 90000
+    const price = 2700
     const pc = {
       price,
       /* getPrice: function() {
 
       }, */
       get finalPrice() {
-        return this.price * 1.16
+        return this.price * 1.16;
       },
       set offer(offer) {
         this.price -= offer;
       },
       getPrice() {
         console.log(this.price);
+      },
+      *discount(offer) {
+        let price = this.finalPrice;
+        while (true) {
+          yield price -= offer
+        }
       }
     }
 
     window.price.textContent = pc.price;
-    pc.offer = 1000;
+    pc.offer = 500;
     window.offer.textContent = pc.price;
 
     window['final-price'].textContent = pc.finalPrice;
+
+    const makeAnOffer = pc.discount(15);
+    window['make-offer'].addEventListener('click', () => {
+      // console.log(makeAnOffer.next());
+      // console.log('click');
+      window['final-price'].textContent = makeAnOffer.next().value;
+    });
   </script>
 </body>
 
