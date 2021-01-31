@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shorthand Property Names</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .app,
+    p+strong {
+      font-family: sans-serif;
+      font-size: 3rem;
+    }
+
+    .app div>button {
+      display: inline-block;
+      padding: 1rem;
+      width: 60%;
+      font-size: 2rem;
+      background-color: royalblue;
+      color: #fff;
+      border-radius: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <p>
+      <strong>Precio:</strong>
+      <span id="price">-</span>
+    </p>
+    <p>
+      <strong>Precio Oferta:</strong>
+      <span id="offer">-</span>
+    </p>
+    <p>
+      <strong>Precio Final:</strong>
+      <span id="final-price">-</span>
+    </p>
+    <div>
+      <button type="button">Regatear</button>
+    </div>
+  </div>
+
+  <script>
+    const price = 90000
+    const pc = {
+      price,
+      /* getPrice: function() {
+
+      }, */
+      get finalPrice() {
+        return this.price * 1.16
+      },
+      set offer(offer) {
+        this.price -= offer;
+      },
+      getPrice() {
+        console.log(this.price);
+      }
+    }
+
+    window.price.textContent = pc.price;
+    pc.offer = 1000;
+    window.offer.textContent = pc.price;
+
+    window['final-price'].textContent = pc.finalPrice;
+  </script>
+</body>
+
+</html>
