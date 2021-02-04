@@ -1,0 +1,45 @@
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const FormularioTareas = ({ tareas, setTareas }) => {
+  const [inputTarea, setInputTarea] = useState('');
+  // console.log(inputTarea)
+
+  const handleInput = (e) => {
+    setInputTarea(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTareas([
+      ...tareas,
+      {
+        id: uuidv4(),
+        texto: inputTarea,
+        completada: false,
+      },
+    ]);
+  };
+
+  return (
+    <>
+      <form action='' className='formulario-tareas' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          className='formulario-tareas__input'
+          placeholder='Escribe tu tarea'
+          autoFocus
+          value={inputTarea}
+          onChange={(e) => handleInput(e)}
+        />
+        <button type='submit' className='formulario-tareas__btn'>
+          <FontAwesomeIcon icon={faPlusSquare} className='formulario-tareas__icono-btn' />
+        </button>
+      </form>
+    </>
+  );
+};
+
+export default FormularioTareas;
