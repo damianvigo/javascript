@@ -1,18 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink, Switch, Route } from 'react-router-dom';
-import Inicio from './components/Inicio'
-import Blog from './components/Blog'
-import Tienda from './components/Tienda'
-import Error404 from './components/Error404'
+import Inicio from './components/Inicio';
+import Blog from './components/Blog';
+import Tienda from './components/Tienda';
+import Error404 from './components/Error404';
+import Carrito from './components/Carrito';
 
 const App = () => {
   const productos = [
-    {id: 1, nombre: 'Producto 1'},
-    {id: 2, nombre: 'Producto 2'},
-    {id: 3, nombre: 'Producto 3'},
-    {id: 4, nombre: 'Producto 4'}
-  ]
+    { id: 1, nombre: 'Producto 1' },
+    { id: 2, nombre: 'Producto 2' },
+    { id: 3, nombre: 'Producto 3' },
+    { id: 4, nombre: 'Producto 4' },
+  ];
+
+  const [carrito, setCarrito] = useState([]);
+
+  const agregarProductoAlCarrito = (idProductoAAgregar, nombre) => {
+    if (carrito.length === 0) {
+      setCarrito([{ id: idProductoAAgregar, nombre: nombre, cantidad: 1 }]);
+    } else {
+      // Reviso que el carrito que no tenga ya el producto a agregar
+      // Si ya lo tiene actualizar el valor
+      // Si no lo tiene lo agrego
+
+      // Para poder editar el array lo clono
+      const nuevoCarrito = [...carrito];
+      console.log(nuevoCarrito)
+
+      // Compruebo si el carrito ya tiene el id del producto a agregar
+      const yaEstaEnCarrito =
+        nuevoCarrito.filter((productoDeCarrito) => {
+          return productoDeCarrito.id === idProductoAAgregar;
+        }).length > 0;
+        console.log(yaEstaEnCarrito); // true
+      // Si ya tiene el producto entonces lo actualizo
+      if (yaEstaEnCarrito) {
+        // Lo busco. obtengo su posicion en el array.
+        // y en base a la posicion actualizo el valor.
+        nuevoCarrito.forEach((productoDeCarrito, index) => {
+          if (productoDeCarrito.id === idProductoAAgregar) {
+            const cantidad = nuevoCarrito[index].cantidad;
+            console.log(nuevoCarrito[index]);
+            nuevoCarrito[index] = { id: idProductoAAgregar, nombre: nombre, cantidad: cantidad + 1 };
+          }
+        });
+        // agrego el producto al array
+      } else {
+        nuevoCarrito.push(
+          {id: idProductoAAgregar,
+          nombre: nombre,
+          cantidad: 1
+        }
+        );
+      }
+      // actualizar el carrito
+      setCarrito(nuevoCarrito);
+    }
+  };
 
   return (
     <Contenedor>
@@ -26,13 +72,13 @@ const App = () => {
           <Route path='/' exact={true} component={Inicio} />
           <Route path='/blog' component={Blog} />
           <Route path='/tienda'>
-            <Tienda productos={productos} />
+            <Tienda productos={productos} agregarProductoAlCarrito={agregarProductoAlCarrito} />
           </Route>
           <Route component={Error404} />
         </Switch>
       </main>
       <aside>
-        <h3>Sidebar</h3>
+        <Carrito carrito={carrito} />
       </aside>
     </Contenedor>
   );
