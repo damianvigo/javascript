@@ -35,7 +35,7 @@ const Tarea = ({ tarea, editTarea, toggleCompletada, borrarTarea }) => {
             </button>
           </form>
         ) : (
-          tarea.texto
+          <p>{tarea.texto}</p>
         )}
       </div>
       <div className='lista-tareas__contendor-botones'>
