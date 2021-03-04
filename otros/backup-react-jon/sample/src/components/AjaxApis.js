@@ -41,7 +41,7 @@ export default class AjaxApis extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state.pokemons);
     return (
       <>
         <h2>Peticiones Asincronas en Componentes de Clase</h2>

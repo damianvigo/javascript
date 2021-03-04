@@ -9,7 +9,8 @@ import RenderizadoElementos from './components/RenderizadoElementos';
 import { EventosES6, EventosES7, MasSobreEventos } from './components/Eventos';
 import Padre from './components/ComunicacionComponentes';
 import CicloVida from './components/CicloVida';
-import AjaxApis from './components/AjaxApis';
+/* import AjaxApis from './components/AjaxApis'; */
+import ContadorHooks from './components/ContadorHooks';
 
 function App() {
 let nombre = 'dvdev';
@@ -62,7 +63,9 @@ let estaciones = ['primavera', 'verano', 'otono', 'invierno'];
         <hr />
         <CicloVida />
         <hr />
-        <AjaxApis />
+        {/* <AjaxApis /> */}
+        <hr />
+        <ContadorHooks titulo='seguidores' />
       </section>
       </header>
     </div>
