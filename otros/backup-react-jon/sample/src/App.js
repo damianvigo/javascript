@@ -11,6 +11,8 @@ import Padre from './components/ComunicacionComponentes';
 import CicloVida from './components/CicloVida';
 /* import AjaxApis from './components/AjaxApis'; */
 import ContadorHooks from './components/ContadorHooks';
+import ScrollHooks from './components/ScrollHooks';
+import RelojHooks from './components/RelojHooks';
 
 function App() {
 let nombre = 'dvdev';
@@ -66,6 +68,10 @@ let estaciones = ['primavera', 'verano', 'otono', 'invierno'];
         {/* <AjaxApis /> */}
         <hr />
         <ContadorHooks titulo='seguidores' />
+        <hr />
+        <ScrollHooks />
+        <hr />
+        <RelojHooks />
       </section>
       </header>
     </div>
