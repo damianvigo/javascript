@@ -13,6 +13,10 @@ import CicloVida from './components/CicloVida';
 import ContadorHooks from './components/ContadorHooks';
 import ScrollHooks from './components/ScrollHooks';
 import RelojHooks from './components/RelojHooks';
+import HooksPersonalizados from './components/HooksPersonalizados';
+import Referencias from './components/Referencias';
+import Formularios from './components/Formularios';
+/* import AjaxHooks from './components/AjaxHooks'; */
 
 function App() {
 let nombre = 'dvdev';
@@ -72,6 +76,18 @@ let estaciones = ['primavera', 'verano', 'otono', 'invierno'];
         <ScrollHooks />
         <hr />
         <RelojHooks />
+        <hr/>
+       {/*  <AjaxHooks /> */}
+       <hr/>
+       <HooksPersonalizados />
+       <hr/>
+       <Referencias />
+       <hr/>
+       <Formularios />
+       <br />
+       <br />
+       <br />
+       <br />
       </section>
       </header>
     </div>
