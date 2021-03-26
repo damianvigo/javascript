@@ -10,6 +10,14 @@ const initialForm = {
 export const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const [form, setForm] = useState(initialForm);
 
+  useEffect(() => {
+    if(dataToEdit) {
+      setForm(dataToEdit);
+    } else {
+      setForm(initialForm);
+    }
+  }, [dataToEdit]);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -41,7 +49,7 @@ export const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) 
 
   return (
     <div>
-      <h3>Agregar</h3>
+      <h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
       <form onSubmit={handleSubmit}>
         <input type='text' name='name' placeholder='Nombre' onChange={handleChange} value={form.name} />
         <input type='text' name='constellation' placeholder='Constelacion' onChange={handleChange} value={form.constellation} />
