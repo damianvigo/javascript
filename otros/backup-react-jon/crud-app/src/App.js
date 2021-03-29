@@ -6,6 +6,7 @@ function App() {
     <>
       <h2>CRUD</h2>
       <CrudApp />
+      <hr />
     </>
   );
 }
