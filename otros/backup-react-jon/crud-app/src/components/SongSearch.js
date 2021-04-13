@@ -11,7 +11,8 @@ const SongSearch = () => {
 
   const handleSearch = (data) => {
     console.log(data);
-  }
+    setSearch(data);
+  };
 
   return (
     <div>
@@ -20,7 +21,7 @@ const SongSearch = () => {
       <SongForm handleSearch={handleSearch} />
       <SongDetails search={search} lyric={lyric} bio={bio} />
     </div>
-  )
-}
+  );
+};
 
-export default SongSearch
+export default SongSearch;
