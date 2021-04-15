@@ -23,7 +23,7 @@ const SongSearch = () => {
 
       setLoading(true);
 
-      const [artistRes, songRes] = await Promise.all([helpHttp().get(artistUrl),helpHttp().get(songUrl)]);
+      const [artistRes, songRes] = await Promise.all([helpHttp().get(artistUrl), helpHttp().get(songUrl)]);
 
       console.log(artistRes, songRes);
 
@@ -45,7 +45,7 @@ const SongSearch = () => {
       <h2>Song Search</h2>
       {loading && <Loader />}
       <SongForm handleSearch={handleSearch} />
-      <SongDetails search={search} lyric={lyric} bio={bio} />
+      {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
     </div>
   );
 };
