@@ -8,7 +8,7 @@ export const useFetch = (url) => {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-
+  
     const fetchData = async () => {
       setLoading(true);
 
@@ -23,7 +23,7 @@ export const useFetch = (url) => {
         }
 
         const json = await res.json();
-
+      
         if (!signal.aborted) {
           setData(json);
           setError(null);

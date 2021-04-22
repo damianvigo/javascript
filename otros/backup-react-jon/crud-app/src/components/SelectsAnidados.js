@@ -6,14 +6,16 @@ const SelectsAnidados = () => {
   const [town, setTown] = useState('');
   const [suburb, setSuburb] = useState('');
 
+  const TOKEN = 'e1369cf8-f8d0-4933-8e1d-e8bebe2745d4';
+
   return (
     <div>
       <h2>Selects Anidados</h2>
       <h3>Mexico</h3>
       <pre>
         <SelectList
-          title='estados'
-          url=''
+          title='estado'
+          url={`https://api-sepomex.hckdrk.mx/query/get_estados?token=${TOKEN}`}
           handleChange={(e) => {
             setState(e.target.value);
           }}
@@ -21,7 +23,7 @@ const SelectsAnidados = () => {
         {state && (
           <SelectList
             title='municipios'
-            url=''
+            url={`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${state}?token=${TOKEN}`}
             handleChange={(e) => {
               setTown(e.target.value);
             }}
@@ -29,8 +31,8 @@ const SelectsAnidados = () => {
         )}
         {town && (
           <SelectList
-            title='colonias'
-            url=''
+            title='colonia'
+            url={`https://api-sepomex.hckdrk.mx/query/get_colonia_por_municipio/${town}?token=${TOKEN}`}
             handleChange={(e) => {
               setSuburb(e.target.value);
             }}
