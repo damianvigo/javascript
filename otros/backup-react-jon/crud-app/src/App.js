@@ -8,7 +8,6 @@ import SongSearch from './components/SongSearch';
 function App() {
   return (
     <>
-      <h2>CRUD</h2>
       <hr />
       <ContactForm />
       <hr />
