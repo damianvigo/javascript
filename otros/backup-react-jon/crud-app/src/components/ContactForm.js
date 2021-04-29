@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from '../hooks/useForm';
+import Loader from './Loader';
+import Message from './Message';
 
 const initialForm = {
   name: '',
@@ -22,7 +24,7 @@ const validationsForm = (form) => {
 
   if (!form.email.trim()) {
     errors.email = "*El campo 'Email' es requerido";
-  } else if (!regexEmail.test(form.name.trim())) {
+  } else if (!regexEmail.test(form.email.trim())) {
     errors.email = "El campo 'Email' es incorrecto";
   }
 
@@ -33,7 +35,7 @@ const validationsForm = (form) => {
   if (!form.comments.trim()) {
     errors.comments = "*El campo 'Comentarios' es requerido";
   } else if (!regexComments.test(form.comments.trim())) {
-    errors.comments = "El campo 'Comentarios' no puede ser mas de 255 caracteres"
+    errors.comments = "El campo 'Comentarios' no puede ser mas de 255 caracteres";
   }
 
   return errors;
@@ -78,6 +80,8 @@ const ContactForm = () => {
         {errors.comments && <p style={styles}>{errors.comments}</p>}
         <input type='submit' value='Enviar' />
       </form>
+      {loading && <Loader />}
+      {response && <Message msg='Los datos han sido enviados' bgColor='#198754' /> }
     </div>
   );
 };
