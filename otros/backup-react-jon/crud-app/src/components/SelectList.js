@@ -22,8 +22,8 @@ const SelectList = ({ title, url, handleChange }) => {
       <label htmlFor={id}>{label}</label>
       {loading && <Loader />}
       <select name={id} id={id} onChange={handleChange}>
-        <option value=''>Elige un {title}</option>
-        {data && options.map((el) => <option value={el}>{el}</option>)}
+        <option value=''>{`Elige ${title}` }</option>
+        {data && options.map((el, index) => <option key={index} value={el}>{el}</option>)}
       </select>
     </>
   );
