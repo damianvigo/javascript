@@ -37,6 +37,10 @@ const MenuConceptos = () => {
             <Link to='/usuario/leona-y-orion'>leona y orion</Link>
           </li>
         </li>
+        <li>
+          <span>Parametros de consulta: </span>
+          <Link to='/productos'>Productos</Link>
+        </li>
       </ol>
     </nav>
   );
