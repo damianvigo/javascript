@@ -31,15 +31,20 @@ const MenuConceptos = () => {
           <NavLink exact to='/no-existe' activeClassName='active'>
             Error 404
           </NavLink>
+          </li>
           <li>
             <span>Parametros </span>
             <Link to='/usuario/damian'>damian</Link>
             <Link to='/usuario/leona-y-orion'>leona y orion</Link>
           </li>
-        </li>
         <li>
           <span>Parametros de consulta: </span>
           <Link to='/productos'>Productos</Link>
+        </li>
+        <li>
+          <span>Redirecciones: </span>
+          <Link to='/about'>About</Link>
+          <Link to='/contact'>Contact</Link>
         </li>
       </ol>
     </nav>
