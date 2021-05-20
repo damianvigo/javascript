@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import Acerca from '../pages/Acerca';
 import Contacto from '../pages/Contacto';
 import Dashboard from '../pages/Dashboard';
@@ -14,6 +14,22 @@ import PrivateRoute from './PrivateRoute';
 const ConceptosBasicos = () => {
   return (
     <div>
+      <h2>Hash Router</h2>
+      <HashRouter>
+        <nav>
+          <Link to='/'>Home</Link>
+          {/* <Link to='/#/'>Acerca</Link> */}
+          <Link to='/acerca'>Acerca</Link>
+          <Link to='/contacto'>Contacto</Link>
+        </nav>
+        <Switch>
+        <Route exact path='/' component={Home} />
+          <Route exact path='/acerca' component={Acerca} />
+          <Route exact path='/contacto' component={Contacto} />
+          <Route path='*' component={Error404} />
+        </Switch>
+      </HashRouter>
+      <hr />
       <h2>Conceptos Basicos</h2>
       <Router>
         <MenuConceptos />
