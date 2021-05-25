@@ -10,11 +10,11 @@ function App() {
         Documentacion
       </a>
       <hr />
-      <SongSearch />
+     {/*  <SongSearch /> */}
       <hr />
       <CrudApi />
       <hr />
-      <ConceptosBasicos />
+      {/* <ConceptosBasicos /> */}
     </div>
   );
 }
