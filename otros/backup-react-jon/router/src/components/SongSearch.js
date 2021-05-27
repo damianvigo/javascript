@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import { helpHttp } from '../helpers/helpHttp';
+import Error404 from '../pages/Error404';
 import Loader from './Loader';
 import SongDetails from './SongDetails';
 import SongForm from './SongForm';
@@ -42,12 +44,26 @@ const SongSearch = () => {
 
   return (
     <div>
-      <h2>Song Search</h2>
-      <article className='grid-1-3'>
-        <SongForm handleSearch={handleSearch} />
+      <HashRouter basename='canciones'>
+        <header>
+          <h2>Song Search</h2>
+          <Link to='/'>Home</Link>
+        </header>
         {loading && <Loader />}
-        {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
-      </article>
+        <article className='grid-1-3'>
+          <Switch>
+            <Route exact path='/'>
+              <SongForm handleSearch={handleSearch} />
+              <h2>Tabla de canciones</h2>
+              {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
+            </Route>
+            <Route exact path='/canciones/:id'>
+              <h2>Pagina de cancion</h2>
+            </Route>
+            <Route path='*' children={<Error404 />}></Route>
+          </Switch>
+        </article>
+      </HashRouter>
     </div>
   );
 };
