@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 const initialForm = {
   name: '',
@@ -9,9 +10,10 @@ const initialForm = {
 
 export const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const [form, setForm] = useState(initialForm);
+  let history = useHistory();
 
   useEffect(() => {
-    if(dataToEdit) {
+    if (dataToEdit) {
       setForm(dataToEdit);
     } else {
       setForm(initialForm);
@@ -45,6 +47,7 @@ export const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) 
   const handleReset = (e) => {
     setForm(initialForm);
     setDataToEdit(null);
+    history.push('/');
   };
 
   return (
