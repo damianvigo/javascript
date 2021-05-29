@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-const SongForm = ({ handleSearch }) => {
+const SongForm = ({ handleSearch, handleSaveSong }) => {
   const initialForm = {
     artist: '',
     song: '',
   };
 
   const [form, setForm] = useState(initialForm);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleChange = (e) => {
     setForm({
@@ -20,11 +21,13 @@ const SongForm = ({ handleSearch }) => {
 
     if (!form.artist || !form.song) {
       alert('Datos incompletos');
+      setIsDisabled(true);
       return;
     }
 
     handleSearch(form);
     setForm(initialForm);
+    setIsDisabled(false);
   };
 
   return (
@@ -33,6 +36,7 @@ const SongForm = ({ handleSearch }) => {
         <input type='text' name='artist' placeholder='Nombre del interprete' onChange={handleChange} value={form.artist} />
         <input type='text' name='song' placeholder='Nombre de la cancion' onChange={handleChange} value={form.song} />
         <input type='submit' value='Enviar' />
+        <input type="button" onClick={handleSaveSong} value='Agregar Cancion' disabled={isDisabled && 'disabled'} />
       </form>
     </div>
   );
