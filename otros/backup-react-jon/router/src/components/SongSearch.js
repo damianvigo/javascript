@@ -50,6 +50,14 @@ const SongSearch = () => {
 
   const handleSaveSong = () => {
     alert('Salvando cancion en Favoritos');
+    let currentSong = {
+      search,
+      lyric,
+      bio,
+    };
+
+    setMySongs((mySongs) => [...mySongs, currentSong]);
+    setSearch(null);
   };
 
   const handleDeleteSong = (id) => {
