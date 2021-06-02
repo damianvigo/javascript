@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import { helpHttp } from '../helpers/helpHttp';
 import Error404 from '../pages/Error404';
+import SongPage from '../pages/SongPage';
 import Loader from './Loader';
 import SongDetails from './SongDetails';
 import SongForm from './SongForm';
@@ -61,7 +62,14 @@ const SongSearch = () => {
   };
 
   const handleDeleteSong = (id) => {
-    alert(`Eliminando cancion con el id: ${id}`);
+    // alert(`Eliminando cancion con el id: ${id}`);
+    let isDelete = window.confirm(`Estas seguro de eliminar la cancion con el id ${id}?`);
+
+    if (isDelete) {
+      let songs = mySongs.filter((el, index) => index !== id);
+      setMySongs(songs);
+      localStorage.setItem('mySongs', JSON.stringify(songs));
+    }
   };
 
   return (
@@ -79,9 +87,7 @@ const SongSearch = () => {
               <SongTable mySongs={mySongs} handleDeleteSong={handleDeleteSong} />
               {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
             </Route>
-            <Route exact path='/canciones/:id'>
-              <h2>Pagina de cancion</h2>
-            </Route>
+            <Route exact path='/:id' children={<SongPage mySongs={mySongs} />} />
             <Route path='*' children={<Error404 />}></Route>
           </Switch>
         </article>
