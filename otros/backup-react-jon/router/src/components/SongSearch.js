@@ -57,8 +57,11 @@ const SongSearch = () => {
       bio,
     };
 
-    setMySongs((mySongs) => [...mySongs, currentSong]);
+    let songs = [...mySongs, currentSong]
+    // setMySongs((mySongs) => );
+    setMySongs(songs);
     setSearch(null);
+    localStorage.setItem('mySongs', JSON.stringify(songs));
   };
 
   const handleDeleteSong = (id) => {
