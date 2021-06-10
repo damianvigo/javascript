@@ -33,6 +33,13 @@ function App() {
         <li>Usalo siempre que se pase una funcion como prop a un componente memorizado</li>
         <li>Usalo siempre que se pase una funcion como parametro de un efecto</li>
       </ul>
+      <hr />
+      <h3>useMemo</h3>
+      <ul>
+        <li>Memoriza un valor calculado, es decir, el resultado de una funcion</li>
+        <li>Genera propiedades computadas</li>
+        <li>Usalo en procesos pesados</li>
+      </ul>
       <Contador />
     </div>
   );
