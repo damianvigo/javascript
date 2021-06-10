@@ -27,6 +27,12 @@ function App() {
         </li>
       </ul>
       <hr />
+      <h3>useCallback</h3>
+      <ul>
+        <li>Memoriza una funcion, para no volverla a definir en cada render</li>
+        <li>Usalo siempre que se pase una funcion como prop a un componente memorizado</li>
+        <li>Usalo siempre que se pase una funcion como parametro de un efecto</li>
+      </ul>
       <Contador />
     </div>
   );
