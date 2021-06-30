@@ -1,20 +1,17 @@
+import { useContext } from "react";
+import CrudContext from "../context/CrudContext";
 import { CrudForm } from "./CrudForm";
 import { CrudTable } from "./CrudTable";
 import Loader from "./Loader";
 import Message from "./Message";
 
 const CrudApi = () => {
-  const context = useContext(contextValue);
+  const { loading, error, db } = useContext(CrudContext);
   return (
     <div>
       <h2>CRUD Api con Context API</h2>
       <article className="grid-1-2">
-        <CrudForm
-          createData={createData}
-          updateData={updateData}
-          dataToEdit={dataToEdit}
-          setDataToEdit={setDataToEdit}
-        />
+        <CrudForm />
         {loading && <Loader />}
         {error && (
           <Message
@@ -22,13 +19,7 @@ const CrudApi = () => {
             bgColor="#dc3545"
           />
         )}
-        {db && (
-          <CrudTable
-            data={db}
-            setDataToEdit={setDataToEdit}
-            deleteData={deleteData}
-          />
-        )}
+        {db && <CrudTable />}
       </article>
     </div>
   );
