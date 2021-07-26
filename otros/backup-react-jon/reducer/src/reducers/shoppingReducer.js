@@ -53,6 +53,7 @@ export function shoppingReducer(state, action) {
             cart: state.cart.filter((item) => item.id !== action.payload),
           };
     }
+    
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
