@@ -5,26 +5,48 @@ export const crudInitialState = {
 };
 
 export function crudReducer(state, action) {
-    switch (action.type) {
-        case TYPES.READ_ALL_DATA: {
-
-        }
-        case TYPES.READ_ONE_DATA: {
-
-        }
-
-        case: TYPES.CREATE_DATA: {
-
-        }
-        case: TYPES.UPDATE_DATA: {
-
-        }
-        case TYPES.DELETE_DATA: {
-
-        }
-        case TYPES.NO_DATA: 
-            return crudInitialState
-        default:
-            return state;
+  switch (action.type) {
+    case TYPES.READ_ALL_DATA: {
+      // console.log(action.payload);
+      return {
+        ...state,
+        db: action.payload.map((data) => data),
+      };
     }
+    /* case TYPES.READ_ONE_DATA: {
+      break;
+    } 
+    */
+    case TYPES.CREATE_DATA: {
+      // console.log(action.payload);
+      return {
+        ...state,
+        db: [...state.db, action.payload],
+      };
+    }
+    case TYPES.UPDATE_DATA: {
+      // console.log(action.payload);
+      let newData = state.db.map((el) =>
+        el.id === action.payload.id ? action.payload : el
+      );
+      // console.log(newData);
+      return {
+        ...state,
+        db: newData,
+      };
+    }
+    case TYPES.DELETE_DATA: {
+      // console.log(action.payload);
+      let newData = state.db.filter((el) => el.id !== action.payload);
+
+      return {
+        ...state,
+        db: newData,
+      };
+    }
+    case TYPES.NO_DATA:
+      return crudInitialState;
+    default:
+      return state;
+  }
 }
