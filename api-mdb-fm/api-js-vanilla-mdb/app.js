@@ -1,5 +1,7 @@
 let page = 1;
-const backBtn = document.getElementById("btnAnterior");
+let movies = "";
+let lastMovie;
+/* const backBtn = document.getElementById("btnAnterior");
 const nextBtn = document.getElementById("btnSiguiente");
 
 nextBtn.addEventListener("click", () => {
@@ -14,7 +16,23 @@ backBtn.addEventListener("click", () => {
     page -= 1;
     loadMovies();
   }
-});
+}); */
+
+let observer = new IntersectionObserver(
+  (entries, observer) => {
+    console.log(entries);
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        page++;
+        loadMovies();
+      }
+    });
+  },
+  {
+    rootMargin: "0px 0px 200px 0px",
+    treshhold: 1.0,
+  }
+);
 
 const loadMovies = async () => {
   try {
@@ -27,7 +45,6 @@ const loadMovies = async () => {
     if (response.status === 200) {
       const data = await response.json();
 
-      let movies = "";
       data.results.forEach((movie) => {
         movies += `
 		<div class='pelicula'>
@@ -38,6 +55,19 @@ const loadMovies = async () => {
       });
 
       document.getElementById("contenedor").innerHTML = movies;
+
+      if (page < 1000) {
+        if (lastMovie) observer.unobserve(lastMovie);
+
+        const moviesOnScreen = document.querySelectorAll(
+          ".contenedor .pelicula"
+        );
+        // console.log(moviesOnScreen);
+
+        lastMovie = moviesOnScreen[moviesOnScreen.length - 1];
+
+        observer.observe(lastMovie);
+      }
     } else if (response.status === 401) {
       console.log("invalid key");
     } else if (response.status === 404) {
