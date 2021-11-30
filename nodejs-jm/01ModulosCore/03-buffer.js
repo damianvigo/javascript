@@ -31,5 +31,4 @@ for (let i = 0; i < buf2.length; i++) {
   buf2[i] = i + 97;
 }
 
-console.log(buf2);
 console.log(buf2.toString('ascii'));

@@ -27,7 +27,7 @@ body {
 
   background-image: url('./img/2.jpg');
   background-size: cover;
-  background-position-y: 700px;
+  background-position-y: 600px;
 
   background-clip: text;
   -webkit-background-clip: text;

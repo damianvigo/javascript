@@ -34,7 +34,7 @@ function saveName(name) {
   // Vuelvo a preguntar
   const question = 'Hola ' + person.name + ' ¿Cuántos años tienes?';
 
-  quiz(question, saveAge);
+quiz(question, saveAge);
 }
 
 function quiz(question, callback) {
