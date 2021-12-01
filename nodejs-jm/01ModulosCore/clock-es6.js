@@ -5,10 +5,8 @@ const Clock = (function () {
     inherits = require('util').inherits;
   //constructor
   const Clock = function () {
-    const self = this;
-
-    setInterval(function () {
-      self.emit('tictac');
+    setInterval(() => {
+      this.emit('tictac');
     }, 1000);
   };
 
@@ -21,7 +19,8 @@ const Clock = (function () {
       min = addZero(date.getMinutes()),
       sec = addZero(date.getSeconds()),
       ampm = date.getHours() < 12 ? 'am' : 'pm',
-      msg = hrs + ':' + min + ':' + sec + ampm;
+      // msg = hrs + ':' + min + ':' + sec + ampm;
+      msg = `${hrs}:${min}:${sec}:${ampm}es6`;
 
     function addZero(num) {
       return num < 10 ? '0' + num : num;
