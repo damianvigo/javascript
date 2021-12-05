@@ -24,7 +24,8 @@ const http = require('http').createServer(webServer),
 
 function webServer(req, res) {
   const pathURL = path.basename(req.url),
-    id = url.parse(req.url, true).query.id;
+    // id = url.parse(req.url, true).query.id;
+    id = new URLSearchParams(pathURL).get('id');
   let charged = false;
 
   console.log(`path: ${pathURL}, id: ${id}`);
