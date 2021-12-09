@@ -16,7 +16,7 @@ fs.access(file, fs.F_OK, function (err) {
         console.log('El archivo se ha leido correctamente');
         fs.writeFile(newFile, data, function (err) {
           return err
-            ? console.log('El archivo no se copiar')
+            ? console.log('El archivo no se copio')
             : console.log('El archivo se ha copiado con exito');
         });
       }
