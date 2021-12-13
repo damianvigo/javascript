@@ -15,6 +15,7 @@ app
     `);
   })
 
+  /* search?s=dvdev */
   .get('/search', (req, res) => {
     res.end(`
       <h1>Welcome to express, the results your search are: <mark>${req.query.s}</mark></h1>
