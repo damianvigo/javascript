@@ -1,0 +1,60 @@
+extend layout.jade
+
+block content
+    // h1 Hola mundo desde Jade *Comentario visible como comentario de HTML enn el navegador
+    //- h2 Estaciones del Año en México *Comentario en Jade se ocultará en el   HTML del navegador
+    //- Bloque de comentarios
+    article#jade.container
+        h1
+            a(href='#{link}', target='_blank')= title
+        p= description
+    article.container 
+        h2 Estructura basica de Jade 
+        p Este archivo HTML es generado con el motor de plantillas Jade
+        p 
+           | para concatenar contenido
+           | en varias lineas 
+           | se usa el pipe '|'
+        include logo
+        //Interpolacion
+        p.
+            Si te gusta la forma en que Jade genera codigo HTML 
+            puedes leer la documentacion del
+            #[a(href='http://jade-lang.com/api', target='_blank') API],
+            la referencia del #[a(href='http://jade-lang.com/reference', target='_blank') lenguaje] y de la la <a href='http://jade-lang.com/command-line' target='_blank'>Linea de comandos</a>
+        br
+        button#presioname.boton Presioname
+        script.
+            // alert('JavaScript ejecutado desde Jade')
+            document.querySelector('#presioname').onclick = () => {
+                alert('He presionado el boton desde Jade con JS')
+            }
+        -const nombre = 'Jade'
+        p Hola #{nombre}
+
+        -const fecha = new Date()
+        -const hora = fecha.getHours()
+        if  (hora < 12)
+            p La hora #{hora} es Antes del Meridiano (AM)
+        else 
+            p La hora #{hora} es Posterior del Meridiano (PM)
+        -let estaciones = ['Primavera', 'Verano', 'Otonio', 'Invierno']
+        h2 Estaciones del Anio 
+        ol
+            each estacion in estaciones
+                li #{estacion}
+        //- Los mixins son funciones en Jade
+        mixin mesesEstacionesUS(estacion, meses)
+            div.item
+                h3 #{estacion}
+                ul
+                    each mes in meses 
+                        li #{mes}
+
+    article.container
+        h2 Estaciones del Anio en US 
+        +mesesEstacionesUS(estaciones[0], ['Abril', 'Mayo', 'Junio'])
+        +mesesEstacionesUS(estaciones[1], ['Julio', 'Agosto', 'Septiembre'])
+        +mesesEstacionesUS(estaciones[0], ['Octubre', 'Noviembre', 'Diciembre'])
+        +mesesEstacionesUS(estaciones[0], ['Enero', 'Febrero', 'Marzo'])
+
