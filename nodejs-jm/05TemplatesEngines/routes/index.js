@@ -13,10 +13,27 @@ function jade(req, res, next) {
   res.render('index', locals);
 }
 
+function ejs(req, res, next) {
+  let locals = {
+    title: 'EJS',
+    link: 'http://embeddedjs.com/',
+    description:
+      'EJS limpia el HTML del JavaScript con plantillas del lado cliente. Combina datos y una plantilla para producir HTML. Código entre <% %> se ejecuta. Código entre <%= %> lo añade al HTML que se resuelve.',
+    seasons: [
+      ['Primavera', ['Abril', 'Mayo', 'Junio']],
+      ['Verano', ['Julio', 'Agosto', 'Septiembre']],
+      ['Otonio', ['Octubre', 'Noviembre', 'Diciembre']],
+      ['Invierno', ['Enero', 'Febrero', 'Marzo']],
+    ],
+  };
+  res.render('index', locals);
+}
+
 router
   .get('/', (req, res) => {
     res.end(`<h1>hey there!</h1>`);
   })
-  .get('/jade', jade);
+  .get('/jade', jade)
+  .get('/ejs', ejs);
 
 module.exports = router;

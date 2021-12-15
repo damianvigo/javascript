@@ -1,0 +1,27 @@
+<article id="ejs" class="container">
+  <h1><a href="<%=link%>" target="_blank"><%=title%></a></h1>
+  <p><%=description%></p>
+</article>
+<br />
+<div id="logo-node"></div>
+<br />
+<button id="presioname">Presioname</button>
+<script>
+  document.querySelector('#presioname').onclick = () => {
+    alert('He presionado el boton desde EJS con JS');
+  };
+
+</script>
+<article class="container">
+    <h2>Estacioens del anio</h2>
+    <% for(let i=0; i<seasons.length; i++) { %>
+        <div class="item">
+            <h3><%=seasons[i][0]%></h3>
+            <ul>
+                <% for(let j=0; i<seasons[i][1].length; j++) {
+                    <li><%=seasons[i][1][0]%</li>
+                }
+            </ul>
+        </div>
+  <%  } %>
+</article>
