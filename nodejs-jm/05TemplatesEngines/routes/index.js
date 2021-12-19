@@ -29,11 +29,26 @@ function ejs(req, res, next) {
   res.render('index', locals);
 }
 
+function error404(req, res, next) {
+  let error = new Error(),
+    locals = {
+      title: 'Error 404',
+      description: 'Recurso No Encontrado',
+      error: error,
+    };
+
+  error.status = 404;
+  res.render('error', locals);
+
+  next();
+}
+
 router
   .get('/', (req, res) => {
     res.end(`<h1>hey there!</h1>`);
   })
   .get('/jade', jade)
-  .get('/ejs', ejs);
+  .get('/ejs', ejs)
+  .use(error404);
 
 module.exports = router;
