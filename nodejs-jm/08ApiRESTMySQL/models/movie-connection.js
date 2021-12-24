@@ -10,6 +10,7 @@ const mysql = require('mysql'),
     database: conf.mysql.db,
   },
   myConn = mysql.createConnection(dbOptions);
+// console.log(mysql);
 // Modelo
 myConn.connect((err) => {
   return err
@@ -17,6 +18,6 @@ myConn.connect((err) => {
     : console.log(`Conexion establecida con MySQL Numero: ${myConn.threadId}`);
 });
 
-console.log(conf.mysql);
+// console.log(conf.mysql);
 
 module.exports = myConn;

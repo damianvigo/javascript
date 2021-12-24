@@ -3,11 +3,11 @@
 const conn = require('./movie-connection'),
   Movie = () => {};
 
-Movie.getAll = () => {};
-
-Movie.insert = () => {};
+Movie.getAll = (cb) => conn.query('SELECT * FROM movie', cb);
 
 Movie.getOne = () => {};
+
+Movie.insert = (data, cb) => conn.query('INSERT INTO movie SET ?', data, cb);
 
 Movie.update = () => {};
 
