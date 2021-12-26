@@ -24,7 +24,29 @@ MovieController.getAll = (req, res, next) => {
   });
 };
 
-MovieController.getOne = (req, res, next) => {};
+MovieController.getOne = (req, res, next) => {
+  let movie_id = req.params.movie_id;
+  console.log(movie_id);
+
+  MovieModel.getOne(movie_id, (err, rows) => {
+    console.log(err, '---', rows);
+    if (err) {
+      let locals = {
+        title: `Error al Buscar el registro con el id: ${movie_id}`,
+        description: 'Error de Sintaxis SQL',
+        error: err,
+      };
+
+      res.render('error', locals);
+    } else {
+      let locals = {
+        title: 'Editar Pelicula',
+        data: rows,
+      };
+      res.render('edit-movie', locals);
+    }
+  });
+};
 
 MovieController.insert = (req, res, next) => {
   let movie = {
@@ -51,9 +73,50 @@ MovieController.insert = (req, res, next) => {
   });
 };
 
-MovieController.update = (req, res, next) => {};
+MovieController.update = (req, res, next) => {
+  let movie = {
+    movie_id: req.body.movie_id,
+    title: req.body.title,
+    release_year: req.body.release_year,
+    rating: req.body.rating,
+    image: req.body.image,
+  };
 
-MovieController.delete = (req, res, next) => {};
+  // console.log(movie);
+  MovieModel.update(movie, (err) => {
+    if (err) {
+      let locals = {
+        title: `Error al actualizar el registro con el id: ${movie.movie_id}`,
+        description: 'Error de Sintaxis SQL',
+        error: err,
+      };
+
+      res.render('error', locals);
+    } else {
+      res.redirect('/');
+    }
+  });
+};
+
+MovieController.delete = (req, res, next) => {
+  let movie_id = req.params.movie_id;
+  console.log(movie_id);
+
+  MovieModel.delete(movie_id, (err, rows) => {
+    console.log(err, '---', rows);
+    if (err) {
+      let locals = {
+        title: `Error al eliminar el registro con el id: ${movie_id}`,
+        description: 'Error de Sintaxis SQL',
+        error: err,
+      };
+
+      res.render('error', locals);
+    } else {
+      res.redirect('/');
+    }
+  });
+};
 
 MovieController.addForm = (req, res, next) =>
   res.render('add-movie', { title: 'Agregar Pelicula' });
