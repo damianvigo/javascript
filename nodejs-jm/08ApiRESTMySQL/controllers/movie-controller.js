@@ -48,7 +48,7 @@ MovieController.getOne = (req, res, next) => {
   });
 };
 
-MovieController.insert = (req, res, next) => {
+/* MovieController.insert = (req, res, next) => {
   let movie = {
     movie_id: req.body.movie_id,
     title: req.body.title,
@@ -71,9 +71,9 @@ MovieController.insert = (req, res, next) => {
       res.redirect('/');
     }
   });
-};
+}; */
 
-MovieController.update = (req, res, next) => {
+/* MovieController.update = (req, res, next) => {
   let movie = {
     movie_id: req.body.movie_id,
     title: req.body.title,
@@ -87,6 +87,31 @@ MovieController.update = (req, res, next) => {
     if (err) {
       let locals = {
         title: `Error al actualizar el registro con el id: ${movie.movie_id}`,
+        description: 'Error de Sintaxis SQL',
+        error: err,
+      };
+
+      res.render('error', locals);
+    } else {
+      res.redirect('/');
+    }
+  });
+}; */
+
+MovieController.save = (req, res, next) => {
+  let movie = {
+    movie_id: req.body.movie_id,
+    title: req.body.title,
+    release_year: req.body.release_year,
+    rating: req.body.rating,
+    image: req.body.image,
+  };
+
+  // console.log(movie);
+  MovieModel.save(movie, (err) => {
+    if (err) {
+      let locals = {
+        title: `Error al salvar el registro con el id: ${movie.movie_id}`,
         description: 'Error de Sintaxis SQL',
         error: err,
       };
