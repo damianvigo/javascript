@@ -1,0 +1,15 @@
+Mongo es lazy, flojo puede crearse al momento de ser requerido
+mongod -> servicio de mongodb
+mongo  -> cliente de cli
+show dbs
+use nombredb
+show collections
+db.collection
+db.collection.insert({"campo": "valor"})
+db.collection.save({ "_id" : ObjectId("61ccf59708daf035e33fdeb4"), "campo" : "valor" })
+db.collection.remove({"campo": "valor"})
+db.collection.find()
+db.collection.find().pretty()
+db.collection.explain()
+db.collection.findOne({"campo": "valor"})
+db.collection.count()
