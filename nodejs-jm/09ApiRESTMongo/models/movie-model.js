@@ -1,11 +1,21 @@
 'use strict';
 
 const conn = require('./movie-connection'),
-  Movie = () => {};
+  MovieModel = () => {};
 
-Movie.getAll = (cb) => {};
+MovieModel.getAll = (cb) => {
+  conn.find().exec((err, docs) => {
+    if (err) throw err;
+    cb(docs);
+  });
+};
 
-Movie.getOne = (id, cb) => {};
+MovieModel.getOne = (id, cb) => {
+  conn.findOne({ movie_id: id }).exec((err, docs) => {
+    if (err) throw err;
+    cb(docs);
+  });
+};
 
 // Movie.insert = (data, cb) => conn.query('INSERT INTO movie SET ?', data, cb);
 
@@ -16,8 +26,39 @@ Movie.getOne = (id, cb) => {};
     cb
   ); */
 
-Movie.save = (data, cb) => {};
+MovieModel.save = (data, cb) => {
+  conn.count({ movie_id: data.movie_id }).exec((err, count) => {
+    if (err) throw err;
+    console.log(`Numero de Docs: ${count}`);
 
-Movie.delete = (id, cb) => {};
+    if (count == 0) {
+      conn.create(data, (err) => {
+        if (err) throw err;
+        cb();
+      });
+    } else if (count == 1) {
+      conn.findOneAndUpdate(
+        { movie_id: data.movie_id },
+        {
+          title: data.title,
+          release_year: data.release_year,
+          rating: data.rating,
+          image: data.image,
+        },
+        (err) => {
+          if (err) throw err;
+          cb();
+        }
+      );
+    }
+  });
+};
 
-module.exports = Movie;
+MovieModel.delete = (id, cb) => {
+  conn.remove({ movie_id: id }, (err, docs) => {
+    if (err) throw err;
+    cb();
+  });
+};
+
+module.exports = MovieModel;

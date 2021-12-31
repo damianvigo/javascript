@@ -15,7 +15,10 @@ const mongoose = require('mongoose'),
   ),
   MovieModel = mongoose.model('Movie', MovieSchema);
 
-mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`);
+mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 
 // console.log(conf.mysql);
 

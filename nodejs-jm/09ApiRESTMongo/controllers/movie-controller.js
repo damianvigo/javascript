@@ -4,23 +4,13 @@ const MovieModel = require('../models/movie-model'),
   MovieController = () => {};
 
 MovieController.getAll = (req, res, next) => {
-  MovieModel.getAll((err, rows) => {
-    if (err) {
-      let locals = {
-        title: 'Error al consultar la base de datos',
-        description: 'Error de Sintaxis SQL',
-        error: err,
-      };
-
-      res.render('error', locals);
-    } else {
-      let locals = {
-        title: 'Lista de Peliculas',
-        data: rows,
-      };
-      // console.log(rows);
-      res.render('index', locals);
-    }
+  MovieModel.getAll((docs) => {
+    let locals = {
+      title: 'Lista de Peliculas',
+      data: docs,
+    };
+    // console.log(rows);
+    res.render('index', locals);
   });
 };
 
@@ -28,23 +18,14 @@ MovieController.getOne = (req, res, next) => {
   let movie_id = req.params.movie_id;
   console.log(movie_id);
 
-  MovieModel.getOne(movie_id, (err, rows) => {
+  MovieModel.getOne(movie_id, (docs) => {
     console.log(err, '---', rows);
-    if (err) {
-      let locals = {
-        title: `Error al Buscar el registro con el id: ${movie_id}`,
-        description: 'Error de Sintaxis SQL',
-        error: err,
-      };
 
-      res.render('error', locals);
-    } else {
-      let locals = {
-        title: 'Editar Pelicula',
-        data: rows,
-      };
-      res.render('edit-movie', locals);
-    }
+    let locals = {
+      title: 'Editar Pelicula',
+      data: docs,
+    };
+    res.render('edit-movie', locals);
   });
 };
 
@@ -108,39 +89,14 @@ MovieController.save = (req, res, next) => {
   };
 
   // console.log(movie);
-  MovieModel.save(movie, (err) => {
-    if (err) {
-      let locals = {
-        title: `Error al salvar el registro con el id: ${movie.movie_id}`,
-        description: 'Error de Sintaxis SQL',
-        error: err,
-      };
-
-      res.render('error', locals);
-    } else {
-      res.redirect('/');
-    }
-  });
+  MovieModel.save(movie, () => res.redirect('/'));
 };
 
 MovieController.delete = (req, res, next) => {
   let movie_id = req.params.movie_id;
   console.log(movie_id);
 
-  MovieModel.delete(movie_id, (err, rows) => {
-    console.log(err, '---', rows);
-    if (err) {
-      let locals = {
-        title: `Error al eliminar el registro con el id: ${movie_id}`,
-        description: 'Error de Sintaxis SQL',
-        error: err,
-      };
-
-      res.render('error', locals);
-    } else {
-      res.redirect('/');
-    }
-  });
+  MovieModel.delete(movie_id, () => res.redirect('/'));
 };
 
 MovieController.addForm = (req, res, next) =>
