@@ -14,3 +14,18 @@ app.use(publicDir).get('/', (req, res) => {
 http.listen(port, () => {
   console.log('Iniciando Express y Socket.IO en localhost:%d', port);
 });
+
+io.on('connection', (socket) => {
+  socket.broadcast.emit('new user', { message: 'Ha entrado un usuario' });
+
+  socket.on('new message', (message) => {
+    io.emit('user says', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`Se ha ido un usuario del Chat`);
+    socket.broadcast.emit('bye bye user', {
+      message: 'Se ha ido un usuario del chat',
+    });
+  });
+});
