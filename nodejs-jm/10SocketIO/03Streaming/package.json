@@ -1,0 +1,25 @@
+{
+  "name": "streaming",
+  "version": "0.0.1",
+  "description": "Creacion de Video Streaming con Express, Socket.IO y API's de JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "Express",
+    "Socket.IO",
+    "RequestAnimationFrame",
+    "GetUserMedia",
+    "Canvas",
+    "Window.URL",
+    "Streaming"
+  ],
+  "author": "@dvdev",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.0"
+  }
+}
