@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+hr {
+  margin: 2rem auto;
+}
+
+.my-page {
+  margin: 2rem auto;
+  padding: 1rem;
+  width: 70%;
+  background-color: #ccc;
+}
+
+.dark {
+  background-color: #fff;
+  filter: invert(1);
+}
