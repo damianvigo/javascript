@@ -33,7 +33,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh' }}>
       <h2>Carrito de Compras</h2>
       <h3>Productos</h3>
       <article className="box grid-responsive">
