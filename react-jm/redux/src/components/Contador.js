@@ -10,6 +10,7 @@ import {
 
 const Contador = () => {
   const state = useSelector((state) => state);
+  // console.log(state);
   const dispatch = useDispatch();
 
   return (
