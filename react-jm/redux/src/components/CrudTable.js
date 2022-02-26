@@ -6,7 +6,7 @@ const CrudTable = ({ data, setDataToEdit, deleteData }) => {
   return (
     <div>
       <h3>Tabla de Datos</h3>
-      <table>
+      <table style={{ margin: '0 auto' }}>
         <thead>
           <tr>
             <th>Nombre</th>
