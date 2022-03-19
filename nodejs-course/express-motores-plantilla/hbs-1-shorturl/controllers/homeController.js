@@ -13,6 +13,7 @@ const leerUrls = async (req, res) => {
 };
 
 const agregarUrl = async (req, res) => {
+  console.log(req.body);
   const { origin } = req.body;
 
   try {
