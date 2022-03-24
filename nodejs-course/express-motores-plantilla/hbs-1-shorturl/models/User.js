@@ -38,10 +38,11 @@ userSchema.pre('save', async function (next) {
     const hash = await bcryptjs.hash(user.password, salt);
 
     user.password = hash;
+
     next();
   } catch (error) {
     console.log(error);
-    next();
+    throw new Error('Error al codificar la contrasenia');
   }
 });
 
