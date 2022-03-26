@@ -1,11 +1,20 @@
 const User = require('../models/User');
+const { validationResult } = require('express-validator');
 const { nanoid } = require('nanoid');
 
 const registerForm = (req, res) => {
-  res.render('register');
+  res.render('register', { mensajes: req.flash('mensajes') });
 };
 
 const registerUser = async (req, res) => {
+  const errors = validationResult(req);
+  console.log(errors.isEmpty());
+  if (!errors.isEmpty()) {
+    // return res.json(errors);
+    req.flash('mensajes', errors.array());
+    return res.redirect('/auth/register');
+  }
+
   console.log(req.body);
   const { userName, email, password } = req.body;
   try {
@@ -21,12 +30,16 @@ const registerUser = async (req, res) => {
     await user.save();
 
     // enviar correo electronico de confirmacion
-
+    req.flash('mensajes', [
+      { msg: 'Revisa tu correo electronico y valida tu cuenta' },
+    ]);
     res.redirect('/auth/login');
     // console.log(user);
     //  res.json(user);
   } catch (error) {
-    res.json({ error: error.message });
+    // res.json({ error: error.message });
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/auth/register');
   }
 
   // res.json(req.body);
@@ -46,17 +59,28 @@ const confirmarCuenta = async (req, res) => {
 
     await user.save();
 
+    req.flash('mensajes', [
+      { msg: 'Cuenta verificada, puedes iniciar sesion' },
+    ]);
     res.redirect('/auth/login');
   } catch (error) {
-    res.json({ error: error.message });
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/auth/login');
+    // res.json({ error: error.message });
   }
 };
 
 const loginForm = (req, res) => {
-  res.render('login');
+  res.render('login', { mensajes: req.flash('mensajes') });
 };
 
 const loginUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash('mensajes', errors.array());
+    return res.redirect('/auth/login');
+  }
+
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -70,7 +94,9 @@ const loginUser = async (req, res) => {
     res.redirect('/');
   } catch (error) {
     console.log(error);
-    res.send(error.message);
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/auth/login');
+    // res.send(error.message);
   }
 };
 
