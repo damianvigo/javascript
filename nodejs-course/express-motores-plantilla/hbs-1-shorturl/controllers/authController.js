@@ -91,7 +91,11 @@ const loginUser = async (req, res) => {
     if (!(await user.comparePassword(password)))
       throw new Error('Password incorrecto');
 
-    res.redirect('/');
+    // creando session con passport
+    req.login(user, function (err) {
+      if (err) throw new Error('Error al crear la sesion');
+      return res.redirect('/');
+    });
   } catch (error) {
     console.log(error);
     req.flash('mensajes', [{ msg: error.message }]);
