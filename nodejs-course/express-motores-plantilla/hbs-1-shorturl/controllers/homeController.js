@@ -2,38 +2,62 @@ const Url = require('../models/Url');
 const { nanoid } = require('nanoid');
 
 const leerUrls = async (req, res) => {
+  console.log(req.user);
+  // req.user.id -> from passport
   try {
-    const urls = await Url.find().lean(); //lean() objs de js tradicional
+    const urls = await Url.find({ user: req.user.id }).lean(); //lean() objs de js tradicional
     // console.log(urls);
     res.render('home', { urls: urls });
   } catch (error) {
-    console.log(error);
-    res.send('fallo algo...');
+    /*   console.log(error);
+    res.send('fallo algo...'); */
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/');
   }
 };
 
 const agregarUrl = async (req, res) => {
+  // req.user.id -> from passport
   console.log(req.body);
   const { origin } = req.body;
 
   try {
-    const url = new Url({ origin: origin, shortURL: nanoid(8) });
+    const url = new Url({
+      origin: origin,
+      shortURL: nanoid(8),
+      user: req.user.id,
+    });
     await url.save();
+    req.flash('mensajes', [{ msg: 'Url agregada' }]);
     res.redirect('/');
   } catch (error) {
-    console.log(error);
-    res.send('error algo fallo');
+    /*   console.log(error);
+    res.send('error algo fallo'); */
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/');
   }
 };
 
 const eliminarUrl = async (req, res) => {
+  // req.user.id -> from passport
   const { id } = req.params;
   try {
-    await Url.findByIdAndDelete(id);
+    // await Url.findByIdAndDelete(id);
+    const url = await Url.findById(id);
+    if (!url.user.equals(req.user.id)) {
+      throw new Error('No es tu url');
+    }
+
+    await url.remove();
+    req.flash('mensajes', [{ msg: 'Url eliminada' }]);
+
     res.redirect('/');
   } catch (error) {
-    console.log(error);
-    res.send('error algo fallo');
+    req.flash('mensajes', [{ msg: error.message }]);
+
+    res.redirect('/');
+    /*     console.log(error);
+    res.send('error algo fallo'); */
   }
 };
 
@@ -44,8 +68,10 @@ const editarUrlForm = async (req, res) => {
     // console.log(url);
     res.render('home', { url });
   } catch (error) {
-    console.log(error);
-    res.send('error algo fallo');
+    /*     console.log(error);
+    res.send('error algo fallo'); */
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/');
   }
 };
 
@@ -56,8 +82,10 @@ const editarUrl = async (req, res) => {
     await Url.findByIdAndUpdate(id, { origin: origin });
     res.redirect('/');
   } catch (error) {
-    console.log(error);
-    res.send('error algo fallo');
+    /*    console.log(error);
+    res.send('error algo fallo'); */
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/');
   }
 };
 
@@ -68,7 +96,10 @@ const redireccionamiento = async (req, res) => {
     const urlDB = await Url.findOne({ shortURL: shortURL });
     // console.log(urlDB);
     res.redirect(urlDB.origin);
-  } catch (error) {}
+  } catch (error) {
+    req.flash('mensajes', [{ msg: error.message }]);
+    return res.redirect('/');
+  }
 };
 
 module.exports = {

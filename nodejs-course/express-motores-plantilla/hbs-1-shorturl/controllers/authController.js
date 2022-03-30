@@ -3,7 +3,21 @@ const { validationResult } = require('express-validator');
 const { nanoid } = require('nanoid');
 
 const registerForm = (req, res) => {
-  res.render('register', { mensajes: req.flash('mensajes') });
+  res.render(
+    'register' /* {
+     each view mensajes: req.flash('mensajes'),
+     each view - csrfToken: req.csrfToken(),
+  } */
+  );
+};
+
+const loginForm = (req, res) => {
+  res.render(
+    'login' /* {
+     each view mensajes: req.flash('mensajes'),
+     each view - csrfToken: req.csrfToken(),
+  } */
+  );
 };
 
 const registerUser = async (req, res) => {
@@ -47,6 +61,7 @@ const registerUser = async (req, res) => {
 
 const confirmarCuenta = async (req, res) => {
   const { token } = req.params;
+  console.log(token);
 
   try {
     const user = await User.findOne({ tokenConfirm: token });
@@ -68,10 +83,6 @@ const confirmarCuenta = async (req, res) => {
     return res.redirect('/auth/login');
     // res.json({ error: error.message });
   }
-};
-
-const loginForm = (req, res) => {
-  res.render('login', { mensajes: req.flash('mensajes') });
 };
 
 const loginUser = async (req, res) => {
@@ -104,10 +115,16 @@ const loginUser = async (req, res) => {
   }
 };
 
+const cerrarSesion = (req, res) => {
+  req.logout();
+  return res.redirect('/auth/login');
+};
+
 module.exports = {
   loginForm,
   registerForm,
   registerUser,
   confirmarCuenta,
   loginUser,
+  cerrarSesion,
 };

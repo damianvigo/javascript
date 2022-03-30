@@ -7,6 +7,7 @@ const {
   registerUser,
   confirmarCuenta,
   loginUser,
+  cerrarSesion,
 } = require('../controllers/authController');
 const router = express.Router();
 
@@ -43,5 +44,7 @@ router.post(
   ],
   loginUser
 );
+
+router.get('/logout', cerrarSesion);
 
 module.exports = router;
