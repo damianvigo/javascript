@@ -62,11 +62,17 @@ const eliminarUrl = async (req, res) => {
 };
 
 const editarUrlForm = async (req, res) => {
+  // req.user.id -> from passport
   const { id } = req.params;
   try {
     const url = await Url.findById(id).lean();
     // console.log(url);
-    res.render('home', { url });
+
+    if (!url.user.equals(req.user.id)) {
+      throw new Error('No es tu url');
+    }
+
+    return res.render('home', { url });
   } catch (error) {
     /*     console.log(error);
     res.send('error algo fallo'); */
@@ -79,8 +85,17 @@ const editarUrl = async (req, res) => {
   const { id } = req.params;
   const { origin } = req.body;
   try {
-    await Url.findByIdAndUpdate(id, { origin: origin });
-    res.redirect('/');
+    /*     await Url.findByIdAndUpdate(id, { origin: origin });
+    res.redirect('/'); */
+    const url = await Url.findById(id);
+    if (!url.user.equals(req.user.id)) {
+      throw new Error('No es tu url');
+    }
+
+    await url.updateOne({ origin });
+    req.flash('mensajes', [{ msg: 'Url editada' }]);
+
+    return res.redirect('/');
   } catch (error) {
     /*    console.log(error);
     res.send('error algo fallo'); */
@@ -97,8 +112,8 @@ const redireccionamiento = async (req, res) => {
     // console.log(urlDB);
     res.redirect(urlDB.origin);
   } catch (error) {
-    req.flash('mensajes', [{ msg: error.message }]);
-    return res.redirect('/');
+    req.flash('mensajes', [{ msg: 'No existe esta url configurada' }]);
+    return res.redirect('/auth/login');
   }
 };
 

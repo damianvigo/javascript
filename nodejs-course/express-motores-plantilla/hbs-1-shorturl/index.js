@@ -60,4 +60,4 @@ app.use('/', require('./routes/home'));
 app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log('servidor andando 😍 ' + PORT));
+app.listen(PORT, () => console.log('server working 😍 ' + PORT));
