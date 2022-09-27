@@ -5,7 +5,7 @@ function ElementoLista(props) {
   // console.log(props);
   return (
     <li>
-      <a href={props.frameworks.web} target="_blank">
+      <a href={props.frameworks.web} target="_blank" rel="noreferrer">
         {props.frameworks.name}
       </a>
     </li>
@@ -23,7 +23,7 @@ export default class RenderizadoElementos extends Component {
     // console.log(data);
     return (
       <div>
-        <div>Renderizado de Elementos</div>
+        <h2>Renderizado de Elementos</h2>
         <h3>Estaciones del anio</h3>
         <ol>
           {this.state.seasons.map((el, index) => (
