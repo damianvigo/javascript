@@ -8,7 +8,7 @@ const SongSearch = () => {
   const [search, setSearch] = useState(null);
   const [lyric, setLyric] = useState(null);
   const [bio, setBio] = useState(null);
-  const [loading, setLoadging] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (search === null) return;
@@ -19,20 +19,20 @@ const SongSearch = () => {
       let artistUrl = `https://theaudiodb.com/api/v1/json/2/search.php?s=${artist}`;
       let songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
 
-      //  console.log(artistUrl, songUrl);
+      // console.log(artistUrl, songUrl);
 
-      setLoadging(true);
+      setLoading(true);
 
       const [artistRes, songRes] = await Promise.all([
         helpHttp().get(artistUrl),
         helpHttp().get(songUrl),
       ]);
 
-      //   console.log(artistRes, songRes);
+      // console.log(artistRes, songRes);
       setBio(artistRes);
       setLyric(songRes);
 
-      setLoadging(false);
+      setLoading(false);
     };
 
     fetchData();

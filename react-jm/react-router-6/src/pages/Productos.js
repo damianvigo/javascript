@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Productos = () => {
-  /* let location = useLocation();
-  console.log(location); */
+  let location = useLocation();
+  console.log('useLocation');
+  console.log(location);
   let { search } = useLocation();
   let query = new URLSearchParams(search);
   // console.log(query);
@@ -13,6 +14,7 @@ const Productos = () => {
   console.log(start, end);
 
   let navigate = useNavigate();
+  console.log('useNavigate');
   // console.log(navigate);
 
   const handlePrev = () => {

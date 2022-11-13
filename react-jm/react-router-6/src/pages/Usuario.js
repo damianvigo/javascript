@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 
 const Usuario = () => {
-  /*   let params = useParams();
-  console.log(params); */
+  let params = useParams();
+  console.log('useParams');
+  console.log(params);
   let { username } = useParams();
   return (
     <div>

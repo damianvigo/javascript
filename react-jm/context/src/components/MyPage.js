@@ -23,7 +23,7 @@ const translations = {
   en: {
     headerTitle: 'My application WITHOUT Context Api',
     headerSubtitle: 'My Header',
-    headerLight: 'Sure',
+    headerLight: 'Light',
     headerDark: 'Dark',
     buttonLogin: 'Login',
     buttonLogout: 'Close Session',

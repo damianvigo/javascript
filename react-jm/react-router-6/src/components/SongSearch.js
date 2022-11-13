@@ -34,7 +34,7 @@ const SongSearch = () => {
         helpHttp().get(songUrl),
       ]);
 
-      //   console.log(artistRes, songRes);
+      console.log(artistRes, songRes);
       setBio(artistRes);
       setLyric(songRes);
 

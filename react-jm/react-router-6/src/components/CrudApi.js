@@ -113,7 +113,7 @@ const CrudApi = () => {
               Santos
             </NavLink>
             <NavLink
-              to="santos/agregar"
+              to="/santos/agregar"
               className={({ isActive }) => (isActive ? 'active' : '')}
             >
               Agregar
