@@ -1,6 +1,7 @@
 import { TYPES } from '../actions/crudActions';
 
 export const crudInitialState = {
+  otraVariableDeEstado: 'otra',
   db: null,
 };
 
