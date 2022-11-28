@@ -15,22 +15,27 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: '/blog',
-        element: <Blog />,
-        loader: loaderBlog,
-      },
-      {
-        path: '/blog/:id',
-        element: <Post />,
-        loader: loaderPost,
-      },
-      {
-        path: '/about',
-        element: <About />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: '/blog',
+            element: <Blog />,
+            loader: loaderBlog,
+          },
+          {
+            path: '/blog/:id',
+            element: <Post />,
+            loader: loaderPost,
+          },
+          {
+            path: '/about',
+            element: <About />,
+          },
+        ],
       },
     ],
   },

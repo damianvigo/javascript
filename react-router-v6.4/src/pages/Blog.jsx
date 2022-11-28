@@ -22,6 +22,13 @@ export default Blog;
 
 export const loaderBlog = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+  if (!res.ok)
+    throw {
+      status: res.status,
+      statusText: 'No encontrado',
+    };
+
   const posts = await res.json();
 
   return {
